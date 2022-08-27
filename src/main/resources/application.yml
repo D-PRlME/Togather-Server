@@ -1,0 +1,30 @@
+spring:
+  sql:
+    init:
+      schema-locations: classpath:dropProcedures.sql, classpath:createProcedures.sql
+      separator: $$
+      mode: always
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${URL}
+    username: ${DB-USERNAME}
+    password: ${DB-PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    defer-datasource-initialization: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+redis:
+  port: ${REDIS-PORT}
+  host: ${REDIS-HOST}
+
+jwt:
+  header: ${HEADER}
+  prefix : ${PREFIX}
+  secret-key: ${JWT-SECRET}
+  access-exp: ${ACCESS-EXP}
+  refresh-exp: ${REFRESH-EXP}
