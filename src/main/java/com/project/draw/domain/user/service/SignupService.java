@@ -39,6 +39,8 @@ public class SignupService {
             throw UserAlreadyExistException.EXCEPTION;
         }
 
+        authCodeFacade.checkIsVerified(email);
+
         userRepository.save(User.builder()
                 .accountId(accountId)
                 .name(name)
