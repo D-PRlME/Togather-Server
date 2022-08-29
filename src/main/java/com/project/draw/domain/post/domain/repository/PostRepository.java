@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
 
