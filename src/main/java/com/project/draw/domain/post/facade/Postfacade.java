@@ -4,7 +4,6 @@ import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.exception.InvalidUserException;
 import com.project.draw.domain.post.exception.PostNotFoundException;
-import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
