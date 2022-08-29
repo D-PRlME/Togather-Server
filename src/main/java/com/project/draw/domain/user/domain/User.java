@@ -41,6 +41,11 @@ public class User {
     private String accountId;
 
     @NotNull
+    @Size(max = 40)
+    @Column(unique = true)
+    private String email;
+
+    @NotNull
     @Size(max = 30)
     private String name;
 
@@ -56,7 +61,7 @@ public class User {
     @Column(length = 7)
     private Authority authority;
 
-    public void setPassword(String password) {
+    public void updatePassword(String password) {
         this.password = password;
     }
 
