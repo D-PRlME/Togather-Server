@@ -5,6 +5,7 @@ import com.project.draw.domain.user.domain.Authority;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
 import com.project.draw.domain.user.exception.UserAlreadyExistException;
+import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.domain.user.presentation.dto.request.SignupRequest;
 import com.project.draw.global.image.DefaultImage;
 import com.project.draw.global.security.jwt.JwtProperties;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 public class SignupService {
 
     private final UserRepository userRepository;
+    private final AuthCodeFacade authCodeFacade;
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtProperties jwtProperties;
     private final PasswordEncoder passwordEncoder;
@@ -29,16 +31,18 @@ public class SignupService {
     public TokenResponse execute(SignupRequest request) {
 
         String accountId = request.getAccountId();
+        String email = request.getEmail();
         String name = request.getName();
         String password = request.getPassword();
 
-        if (userRepository.findByAccountId(accountId).isPresent()){
+        if (userRepository.findByAccountId(accountId).isPresent()) {
             throw UserAlreadyExistException.EXCEPTION;
         }
 
-        User user = userRepository.save(User.builder()
+        userRepository.save(User.builder()
                 .accountId(accountId)
                 .name(name)
+                .email(email)
                 .password(passwordEncoder.encode(password))
                 .authority(Authority.USER)
                 .profileImageUrl(DefaultImage.USER_PROFILE_IMAGE)
