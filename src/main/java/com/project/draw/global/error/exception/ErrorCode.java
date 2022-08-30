@@ -13,10 +13,14 @@ public enum ErrorCode {
 
     EXPIRED_TOKEN(401,"AUTH-401-1", "Expired Token" ),
     INVALID_TOKEN(401,"AUTH-401-2","Invalid Token"),
+
+    INVALID_USER(401, "AUTH-401-3", "Invalid User"),
     REFRESH_TOKEN_NOT_FOUND(404, "AUTH-404-1", "Refresh Token Not Found"),
 
     PASSWORD_NOT_VALID(401, "USER-401-1", "Password Not Valid"),
     USER_NOT_FOUND(404, "USER-404-2", "User Not Found" ),
+
+    POST_NOT_FOUND(404, "USER-404-3", "Post Not Found" ),
     USER_ALREADY_EXIST(409, "USER-409-1", "User Already Exist"),
 
     INTERNAL_SERVER_ERROR(500, "SERVER-500-1", "Internal Server Error");
