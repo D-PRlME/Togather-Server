@@ -7,6 +7,7 @@ import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -14,6 +15,7 @@ public class CreatePostService {
     private final PostRepository postRepository;
     private final UserFacade userFacade;
 
+    @Transactional
     public void execute(CreatePostRequest request) {
         User user = userFacade.getCurrentUser();
 
