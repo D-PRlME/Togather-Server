@@ -3,6 +3,7 @@ package com.project.draw.domain.post.presentation;
 import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.project.draw.domain.post.service.CreatePostService;
+import com.project.draw.domain.post.service.QueryMyPostService;
 import com.project.draw.domain.post.service.UpdatePostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class PostController {
     private final CreatePostService createPostService;
     private final UpdatePostService updatePostService;
+    private final QueryMyPostService queryMyPostService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -27,5 +29,10 @@ public class PostController {
     @PatchMapping("/{post-id}")
     public void updatePost(@PathVariable("post-id") Long id, @RequestBody @Valid UpdatePostRequest request) {
         updatePostService.execute(id, request);
+    }
+
+    @GetMapping("/my")
+    public void queryMyPosts() {
+        queryMyPostService.execute();
     }
 }
