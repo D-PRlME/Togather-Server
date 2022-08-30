@@ -2,6 +2,7 @@ package com.project.draw.domain.post.presentation;
 
 import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
+import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
 import com.project.draw.domain.post.service.CreatePostService;
 import com.project.draw.domain.post.service.QueryMyPostService;
 import com.project.draw.domain.post.service.UpdatePostService;
@@ -32,7 +33,7 @@ public class PostController {
     }
 
     @GetMapping("/my")
-    public void queryMyPosts() {
-        queryMyPostService.execute();
+    public PostListResponse queryMyPosts() {
+        return queryMyPostService.execute();
     }
 }
