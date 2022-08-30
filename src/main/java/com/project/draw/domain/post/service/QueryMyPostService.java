@@ -21,12 +21,12 @@ public class QueryMyPostService {
 
     @Transactional
     public PostListResponse execute() {
-        List<PostResponse> MyPostList = postRepository.findAllByUserOrderByCreatedAtAsc(userFacade.getCurrentUser())
+        List<PostResponse> myPostList = postRepository.findAllByUserOrderByCreatedAtAsc(userFacade.getCurrentUser())
                 .stream()
                 .map(this::postBuilder)
                 .collect(Collectors.toList());
 
-        return new PostListResponse(MyPostList);
+        return new PostListResponse(myPostList);
     }
 
     private PostResponse postBuilder(Post post) {
