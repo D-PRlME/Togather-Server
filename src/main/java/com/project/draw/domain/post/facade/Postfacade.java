@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class Postfacade {
+public class PostFacade {
     private final UserFacade userFacade;
     private final PostRepository postRepository;
 

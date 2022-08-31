@@ -2,8 +2,10 @@ package com.project.draw.domain.post.presentation;
 
 import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
+import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
 import com.project.draw.domain.post.service.CreatePostService;
 import com.project.draw.domain.post.service.QueryMyPostService;
+import com.project.draw.domain.post.service.QueryPostsService;
 import com.project.draw.domain.post.service.UpdatePostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ public class PostController {
     private final CreatePostService createPostService;
     private final UpdatePostService updatePostService;
     private final QueryMyPostService queryMyPostService;
+    private final QueryPostsService queryPostsService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -32,7 +35,12 @@ public class PostController {
     }
 
     @GetMapping("/my")
-    public void queryMyPosts() {
-        queryMyPostService.execute();
+    public PostListResponse queryMyPosts() {
+        return queryMyPostService.execute();
+    }
+
+    @GetMapping
+    public PostListResponse queryPosts() {
+        return queryPostsService.execute();
     }
 }

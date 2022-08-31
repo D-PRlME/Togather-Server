@@ -3,8 +3,6 @@ package com.project.draw.domain.post.service;
 import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
-import com.project.draw.domain.post.presentation.dto.response.PostListResponse.PostResponse;
-import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,23 +12,22 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class QueryMyPostService {
+public class QueryPostsService {
 
     private final PostRepository postRepository;
-    private final UserFacade userFacade;
 
     @Transactional
     public PostListResponse execute() {
-        List<PostResponse> myPostList = postRepository.findAllByUserOrderByCreatedAtAsc(userFacade.getCurrentUser())
+        List<PostListResponse.PostResponse> postList = postRepository.findAllByOrderByCreatedAtAsc()
                 .stream()
                 .map(this::postBuilder)
                 .collect(Collectors.toList());
 
-        return new PostListResponse(myPostList);
+        return new PostListResponse(postList);
     }
 
-    private PostResponse postBuilder(Post post) {
-        return PostResponse.builder()
+    private PostListResponse.PostResponse postBuilder(Post post) {
+        return PostListResponse.PostResponse.builder()
                 .title(post.getTitle())
                 .tags(post.getTags())
                 .user_name(post.getUser().getName())
@@ -38,3 +35,4 @@ public class QueryMyPostService {
                 .build();
     }
 }
+
