@@ -1,5 +1,6 @@
 package com.project.draw.domain.post.presentation;
 
+import com.project.draw.domain.post.domain.Tag;
 import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.project.draw.domain.post.presentation.dto.response.PostInfoResponse;
@@ -20,6 +21,7 @@ public class PostController {
     private final QueryMyPostService queryMyPostService;
     private final QueryPostsService queryPostsService;
     private final QueryPostInfoService queryPostInfoService;
+    private final QueryPostByTagService queryPostByTagService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -46,5 +48,10 @@ public class PostController {
     @GetMapping("/{post-id}")
     public PostInfoResponse queryPostInfo(@PathVariable("post-id") Long id) {
         return queryPostInfoService.execute(id);
+    }
+
+    @GetMapping("/")
+    public PostListResponse queryPostByTag(@RequestParam(value = "tag")Tag tag) {
+        return queryPostByTagService.execute(tag);
     }
 }
