@@ -1,7 +1,5 @@
 package com.project.draw.domain.user.facade;
 
-import com.project.draw.domain.chat.exception.RoomNotFoundException;
-import com.project.draw.domain.chat.exception.UnableJoinException;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
 import com.project.draw.domain.user.exception.UserNotFoundException;
@@ -30,13 +28,7 @@ public class UserFacade {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
-    public User getUserNotJoined(String accountId) {
-        return userRepository.findUserNotJoined(accountId)
-                .orElseThrow(() -> UnableJoinException.EXCEPTION);
-    }
-
-    public User getUserAndFetchRoom(String accountId) {
-        return userRepository.findUserAndFetchRoom(accountId)
-                .orElseThrow(() -> RoomNotFoundException.EXCEPTION);
+    public boolean emailIsExist(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }
