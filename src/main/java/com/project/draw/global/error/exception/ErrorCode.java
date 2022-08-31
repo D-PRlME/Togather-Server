@@ -26,7 +26,11 @@ public enum ErrorCode {
     POST_NOT_FOUND(404, "USER-404-3", "Post Not Found" ),
     USER_ALREADY_EXIST(409, "USER-409-1", "User Already Exist"),
 
+    IMAGE_SAVE_FAIL(400, "IMAGE-400-1", "Image Save Fail"),
+    IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
+
     MAIL_SEND_FAIL(404, "MAIL-404-1","Mail Send Fail"),
+
     INTERNAL_SERVER_ERROR(500, "SERVER-500-1", "Internal Server Error");
 
     private final Integer status;
