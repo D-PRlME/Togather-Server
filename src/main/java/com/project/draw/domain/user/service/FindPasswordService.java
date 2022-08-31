@@ -1,28 +1,28 @@
 package com.project.draw.domain.user.service;
 
 import com.project.draw.domain.user.domain.User;
-import com.project.draw.domain.user.exception.PasswordMismatchException;
+import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.domain.user.facade.UserFacade;
-import com.project.draw.domain.user.presentation.dto.request.UpdatePasswordRequest;
+import com.project.draw.domain.user.presentation.dto.request.FindPasswordRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
-public class UpdatePasswordService {
+@Service
+public class FindPasswordService {
 
     private final UserFacade userFacade;
+    private final AuthCodeFacade authCodeFacade;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void execute(UpdatePasswordRequest request) {
+    public void execute(FindPasswordRequest request) {
 
         User user = userFacade.getCurrentUser();
 
-        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword()))
-            throw PasswordMismatchException.EXCEPTION;
+        authCodeFacade.checkIsVerified(user.getEmail());
 
         user.updatePassword(passwordEncoder.encode(request.getNewPassword()));
     }
