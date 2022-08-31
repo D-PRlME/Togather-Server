@@ -54,4 +54,10 @@ public class PostController {
     public PostListResponse queryPostByTag(@RequestParam(value = "tag")Tag tag) {
         return queryPostByTagService.execute(tag);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{post-id}")
+    public void deletePost(@PathVariable("post-id")Long id) {
+
+    }
 }
