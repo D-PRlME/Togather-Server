@@ -4,7 +4,6 @@ package com.project.draw.domain.user.domain;
 import com.project.draw.domain.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.project.draw.global.image.DefaultImage;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,16 +16,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(indexes = @Index(columnList = "accountId"))
 @Entity
 public class User {
 
@@ -60,6 +54,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(length = 7)
     private Authority authority;
+
+    @Builder
+    public User(String accountId, String email, String name, String password, String profileImageUrl, Authority authority) {
+        this.accountId = accountId;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.profileImageUrl = profileImageUrl;
+        this.authority = authority;
+    }
 
     public void updatePassword(String password) {
         this.password = password;
