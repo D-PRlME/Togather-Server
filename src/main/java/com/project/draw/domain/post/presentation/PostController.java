@@ -2,11 +2,9 @@ package com.project.draw.domain.post.presentation;
 
 import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
+import com.project.draw.domain.post.presentation.dto.response.PostInfoResponse;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
-import com.project.draw.domain.post.service.CreatePostService;
-import com.project.draw.domain.post.service.QueryMyPostService;
-import com.project.draw.domain.post.service.QueryPostsService;
-import com.project.draw.domain.post.service.UpdatePostService;
+import com.project.draw.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +19,7 @@ public class PostController {
     private final UpdatePostService updatePostService;
     private final QueryMyPostService queryMyPostService;
     private final QueryPostsService queryPostsService;
+    private final QueryPostInfoService queryPostInfoService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -42,5 +41,10 @@ public class PostController {
     @GetMapping
     public PostListResponse queryPosts() {
         return queryPostsService.execute();
+    }
+
+    @GetMapping("/{post-id}")
+    public PostInfoResponse queryPostInfo(@PathVariable("post-id") Long id) {
+        return queryPostInfoService.execute(id);
     }
 }
