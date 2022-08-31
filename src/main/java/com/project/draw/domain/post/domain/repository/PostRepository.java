@@ -15,5 +15,5 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
     List<Post> findAllByTitleContains(String title); //검색어로 조회
 
-    List<Post> findAllByTags(List<Tag> tags); //태그별로 조회
+    List<Post> findAllByTagsContainsOrderByCreatedAtAsc(Tag tag); //태그별로 조회
 }
