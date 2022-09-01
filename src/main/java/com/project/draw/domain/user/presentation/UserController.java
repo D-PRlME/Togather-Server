@@ -6,13 +6,12 @@ import com.project.draw.domain.user.presentation.dto.request.FindPasswordRequest
 import com.project.draw.domain.user.presentation.dto.request.LoginRequest;
 import com.project.draw.domain.user.presentation.dto.request.SendAuthCodeRequest;
 import com.project.draw.domain.user.presentation.dto.request.SignupRequest;
+import com.project.draw.domain.user.presentation.dto.request.UpdateEmailRequest;
 import com.project.draw.domain.user.presentation.dto.request.UpdatePasswordRequest;
 import com.project.draw.domain.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.project.draw.domain.user.presentation.dto.request.VerifyAuthCodeRequest;
-import com.project.draw.domain.user.presentation.dto.response.FindAccountIdResponse;
 import com.project.draw.domain.user.presentation.dto.response.QueryUserInfoResponse;
 import com.project.draw.domain.user.service.CheckEmailService;
-import com.project.draw.domain.user.service.FindAccountIdService;
 import com.project.draw.domain.user.service.FindPasswordService;
 import com.project.draw.domain.user.service.LoginService;
 import com.project.draw.domain.user.service.LogoutService;
@@ -22,6 +21,7 @@ import com.project.draw.domain.user.service.SendAuthCodeService;
 import com.project.draw.domain.user.service.SendSignupAuthCodeService;
 import com.project.draw.domain.user.service.SignupService;
 import com.project.draw.domain.user.service.TokenRefreshService;
+import com.project.draw.domain.user.service.UpdateEmailService;
 import com.project.draw.domain.user.service.UpdatePasswordService;
 import com.project.draw.domain.user.service.UpdateUserInfoService;
 import com.project.draw.domain.user.service.VerifyAuthCodeService;
@@ -60,10 +60,10 @@ public class UserController {
 
     private final UpdateUserInfoService updateUserInfoService;
     private final UpdatePasswordService updatePasswordService;
+    private final UpdateEmailService updateEmailService;
 
     private final SendAuthCodeService sendAuthCodeService;
     private final FindPasswordService findPasswordService;
-    private final FindAccountIdService findAccountIdService;
 
     private final LogoutService logoutService;
     private final WithdrawalService withdrawalService;
@@ -84,7 +84,6 @@ public class UserController {
     public void verifyAuthCode(@RequestBody @Valid VerifyAuthCodeRequest request) {
         verifyAuthCodeService.execute(request);
     }
-
 
     @PostMapping
     public TokenResponse signup(@RequestBody @Valid SignupRequest request){
@@ -113,6 +112,12 @@ public class UserController {
         updatePasswordService.execute(request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/email")
+    public void updateEmail(@RequestBody @Valid UpdateEmailRequest request) {
+        updateEmailService.execute(request);
+    }
+
     @GetMapping
     public QueryUserInfoResponse queryMyInfo() {
         return queryMyInfoService.execute();
@@ -133,11 +138,6 @@ public class UserController {
     @PutMapping("/password")
     public void findPassword(@RequestBody @Valid FindPasswordRequest request) {
         findPasswordService.execute(request);
-    }
-
-    @GetMapping("/account-id")
-    public FindAccountIdResponse findPassword() {
-        return findAccountIdService.execute();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
