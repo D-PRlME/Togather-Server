@@ -19,7 +19,9 @@ public class UpdateEmailService {
     public void execute(UpdateEmailRequest request) {
 
         User user = userFacade.getCurrentUser();
+
         String newEmail = request.getNewEmail();
+        userFacade.emailIsExist(newEmail);
 
         authCodeFacade.checkIsVerified(newEmail);
 
