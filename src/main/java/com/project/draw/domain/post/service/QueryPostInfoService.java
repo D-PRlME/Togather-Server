@@ -12,7 +12,7 @@ public class QueryPostInfoService {
     private final PostFacade postFacade;
 
     public PostInfoResponse execute(Long id) {
-        Post post = postFacade.getPost(id);
+        Post post = postFacade.getPostById(id);
 
         return PostInfoResponse.builder()
                 .title(post.getTitle())

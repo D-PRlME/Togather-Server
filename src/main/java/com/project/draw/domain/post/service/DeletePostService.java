@@ -12,6 +12,6 @@ public class DeletePostService {
     private final PostRepository postRepository;
 
     public void execute(Long id) {
-        postRepository.delete(postFacade.getPost(id));
+        postRepository.delete(postFacade.getPostById(id));
     }
 }

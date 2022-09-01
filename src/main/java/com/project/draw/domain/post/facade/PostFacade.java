@@ -14,7 +14,7 @@ public class PostFacade {
     private final UserFacade userFacade;
     private final PostRepository postRepository;
 
-    public Post getPost(Long id) {
+    public Post getPostById(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
     }
