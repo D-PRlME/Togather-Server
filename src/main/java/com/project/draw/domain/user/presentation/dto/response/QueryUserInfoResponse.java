@@ -8,5 +8,6 @@ import lombok.Getter;
 public class QueryUserInfoResponse {
 
     private final String name;
+    private final String email;
     private final String profileImageUrl;
 }

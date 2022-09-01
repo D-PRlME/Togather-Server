@@ -73,4 +73,8 @@ public class User {
         this.profileImageUrl = request.getProfileImageUrl() == null ? DefaultImage.USER_PROFILE_IMAGE : getProfileImageUrl();
         this.name = request.getUsername();
     }
+
+    public void updateEmail(String email) {
+        this.email = email;
+    }
 }
