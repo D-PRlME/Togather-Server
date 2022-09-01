@@ -15,7 +15,7 @@ public class UpdatePostService {
     @Transactional
     public void execute(Long id, UpdatePostRequest request) {
 
-        Post post = postFacade.getPost(id);
+        Post post = postFacade.getPostById(id);
 
         postFacade.checkUser(post);
 
