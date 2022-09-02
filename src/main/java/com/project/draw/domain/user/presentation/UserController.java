@@ -1,6 +1,6 @@
 package com.project.draw.domain.user.presentation;
 
-import com.project.draw.domain.auth.presentation.dto.TokenResponse;
+import com.project.draw.domain.auth.presentation.dto.response.TokenResponse;
 import com.project.draw.domain.user.presentation.dto.request.CheckEmailRequest;
 import com.project.draw.domain.user.presentation.dto.request.FindPasswordRequest;
 import com.project.draw.domain.user.presentation.dto.request.LoginRequest;

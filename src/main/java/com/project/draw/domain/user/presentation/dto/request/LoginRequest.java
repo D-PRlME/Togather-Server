@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class LoginRequest {
 
-    @NotBlank(message = "account_id는 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
-    private String accountId;
+    @NotBlank(message = "email은 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
+    private String email;
 
     @NotBlank(message = "password는 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
     private String password;

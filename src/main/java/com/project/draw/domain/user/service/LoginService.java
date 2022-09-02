@@ -1,6 +1,6 @@
 package com.project.draw.domain.user.service;
 
-import com.project.draw.domain.auth.presentation.dto.TokenResponse;
+import com.project.draw.domain.auth.presentation.dto.response.TokenResponse;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.exception.PasswordMismatchException;
 import com.project.draw.domain.user.facade.UserFacade;
@@ -24,16 +24,16 @@ public class LoginService {
 
     public TokenResponse execute(LoginRequest request) {
 
-        String accountId = request.getAccountId();
+        String email = request.getEmail();
         String password = request.getPassword();
 
-        User user = userFacade.getUserByAccountId(accountId);
+        User user = userFacade.getUserByEmail(email);
 
         if(!passwordEncoder.matches(password, user.getPassword()))
             throw PasswordMismatchException.EXCEPTION;
 
-        String accessToken = jwtTokenProvider.createAccessToken(accountId);
-        String refreshToken = jwtTokenProvider.createRefreshToken(accountId);
+        String accessToken = jwtTokenProvider.createAccessToken(email);
+        String refreshToken = jwtTokenProvider.createRefreshToken(email);
 
         return TokenResponse
                 .builder()

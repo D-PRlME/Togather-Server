@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class AuthDetailsService implements UserDetailsService {
 
     @Override
-    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
-        return new AuthDetails(accountId);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return new AuthDetails(email);
     }
 
 }

@@ -30,11 +30,6 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(max = 30)
-    @Column(unique = true)
-    private String accountId;
-
-    @NotNull
     @Size(max = 40)
     @Column(unique = true)
     private String email;
@@ -56,8 +51,7 @@ public class User {
     private Authority authority;
 
     @Builder
-    public User(String accountId, String email, String name, String password, String profileImageUrl, Authority authority) {
-        this.accountId = accountId;
+    public User(String email, String name, String password, String profileImageUrl, Authority authority) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -72,9 +66,5 @@ public class User {
     public void updateInfo(UpdateUserInfoRequest request) {
         this.profileImageUrl = request.getProfileImageUrl() == null ? DefaultImage.USER_PROFILE_IMAGE : getProfileImageUrl();
         this.name = request.getUsername();
-    }
-
-    public void updateEmail(String email) {
-        this.email = email;
     }
 }

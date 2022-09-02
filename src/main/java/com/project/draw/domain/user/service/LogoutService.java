@@ -21,8 +21,7 @@ public class LogoutService {
 
         User user = userFacade.getCurrentUser();
 
-        RefreshToken refreshToken = refreshTokenRepository.findById(user.getAccountId())
-                .orElseThrow(() -> RefreshTokenNotFoundException.EXCEPTION);
+        RefreshToken refreshToken = refreshTokenRepository.findByEmail(user.getEmail());
 
         refreshTokenRepository.delete(refreshToken);
     }
