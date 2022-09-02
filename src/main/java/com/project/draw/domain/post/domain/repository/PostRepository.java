@@ -13,7 +13,7 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
     List<Post> findAllByOrderByCreatedAtAsc(); //전체조회 시 시간순
 
-    List<Post> findAllByTitleContains(String title); //검색어로 조회
+    List<Post> findAllByTitleContainsOrderByCreatedAtAsc(String keyword); //검색어로 조회
 
     List<Post> findAllByTagsContainsOrderByCreatedAtAsc(Tag tag); //태그별로 조회
 }
