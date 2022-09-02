@@ -3,7 +3,7 @@ package com.project.draw.domain.user.service;
 import com.project.draw.domain.auth.domain.RefreshToken;
 import com.project.draw.domain.auth.domain.repository.RefreshTokenRepository;
 import com.project.draw.domain.auth.exception.RefreshTokenNotFoundException;
-import com.project.draw.domain.auth.presentation.dto.TokenResponse;
+import com.project.draw.domain.auth.presentation.dto.response.TokenResponse;
 import com.project.draw.global.security.jwt.JwtProperties;
 import com.project.draw.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +24,12 @@ public class TokenRefreshService {
         RefreshToken redisRefreshToken = refreshTokenRepository.findByToken(refreshToken)
                 .orElseThrow(() -> RefreshTokenNotFoundException.EXCEPTION);
 
-        String accountId = redisRefreshToken.getAccountId();
-        String newRefreshToken = jwtTokenProvider.createRefreshToken(accountId);
+        String email = redisRefreshToken.getEmail();
+        String newRefreshToken = jwtTokenProvider.createRefreshToken(email);
 
         redisRefreshToken.updateToken(newRefreshToken, jwtProperties.getRefreshExp());
 
-        String newAccessToken = jwtTokenProvider.createAccessToken(accountId);
+        String newAccessToken = jwtTokenProvider.createAccessToken(email);
 
         return TokenResponse
                 .builder()
