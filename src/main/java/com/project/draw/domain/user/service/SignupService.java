@@ -1,6 +1,6 @@
 package com.project.draw.domain.user.service;
 
-import com.project.draw.domain.auth.presentation.dto.TokenResponse;
+import com.project.draw.domain.auth.presentation.dto.response.TokenResponse;
 import com.project.draw.domain.user.domain.Authority;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
@@ -30,19 +30,17 @@ public class SignupService {
     @Transactional
     public TokenResponse execute(SignupRequest request) {
 
-        String accountId = request.getAccountId();
         String email = request.getEmail();
         String name = request.getName();
         String password = request.getPassword();
 
-        if (userRepository.findByAccountIdOrEmail(accountId, email).isPresent()) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw UserAlreadyExistException.EXCEPTION;
         }
 
         authCodeFacade.checkIsVerified(email);
 
         userRepository.save(User.builder()
-                .accountId(accountId)
                 .name(name)
                 .email(email)
                 .password(passwordEncoder.encode(password))
@@ -51,8 +49,8 @@ public class SignupService {
                 .build()
         );
 
-        String accessToken = jwtTokenProvider.createAccessToken(accountId);
-        String refreshToken = jwtTokenProvider.createRefreshToken(accountId);
+        String accessToken = jwtTokenProvider.createAccessToken(email);
+        String refreshToken = jwtTokenProvider.createRefreshToken(email);
 
         return TokenResponse
                 .builder()
