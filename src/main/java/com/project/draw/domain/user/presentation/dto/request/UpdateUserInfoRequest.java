@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class UpdateUserInfoRequest {
 
     @NotBlank(message = "username은 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
-    private String username;
+    private String userName;
 
     private String profileImageUrl;
 }
