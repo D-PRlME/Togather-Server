@@ -6,7 +6,6 @@ import com.project.draw.domain.user.presentation.dto.request.FindPasswordRequest
 import com.project.draw.domain.user.presentation.dto.request.LoginRequest;
 import com.project.draw.domain.user.presentation.dto.request.SendAuthCodeRequest;
 import com.project.draw.domain.user.presentation.dto.request.SignupRequest;
-import com.project.draw.domain.user.presentation.dto.request.UpdateEmailRequest;
 import com.project.draw.domain.user.presentation.dto.request.UpdatePasswordRequest;
 import com.project.draw.domain.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.project.draw.domain.user.presentation.dto.request.VerifyAuthCodeRequest;
@@ -21,7 +20,6 @@ import com.project.draw.domain.user.service.SendAuthCodeService;
 import com.project.draw.domain.user.service.SendSignupAuthCodeService;
 import com.project.draw.domain.user.service.SignupService;
 import com.project.draw.domain.user.service.TokenRefreshService;
-import com.project.draw.domain.user.service.UpdateEmailService;
 import com.project.draw.domain.user.service.UpdatePasswordService;
 import com.project.draw.domain.user.service.UpdateUserInfoService;
 import com.project.draw.domain.user.service.VerifyAuthCodeService;
@@ -60,7 +58,6 @@ public class UserController {
 
     private final UpdateUserInfoService updateUserInfoService;
     private final UpdatePasswordService updatePasswordService;
-    private final UpdateEmailService updateEmailService;
 
     private final SendAuthCodeService sendAuthCodeService;
     private final FindPasswordService findPasswordService;
@@ -110,12 +107,6 @@ public class UserController {
     @PatchMapping("/password")
     public void updateUserPassword(@RequestBody @Valid UpdatePasswordRequest request) {
         updatePasswordService.execute(request);
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping("/email")
-    public void updateEmail(@RequestBody @Valid UpdateEmailRequest request) {
-        updateEmailService.execute(request);
     }
 
     @GetMapping
