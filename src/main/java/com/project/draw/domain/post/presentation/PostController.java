@@ -22,6 +22,7 @@ public class PostController {
     private final QueryPostsService queryPostsService;
     private final QueryPostInfoService queryPostInfoService;
     private final QueryPostByTagService queryPostByTagService;
+    private final QueryPostByKeywordService queryPostByKeywordService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -53,6 +54,11 @@ public class PostController {
     @GetMapping("/")
     public PostListResponse queryPostByTag(@RequestParam(value = "tag")Tag tag) {
         return queryPostByTagService.execute(tag);
+    }
+
+    @GetMapping("/")
+    public PostListResponse queryPostByKeyword(@RequestParam(value = "keyword")String keyword) {
+        return queryPostByKeywordService.execute(keyword);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
