@@ -20,7 +20,7 @@ public class SendSignupAuthCodeService {
 
         String email = request.getEmail();
 
-        if(userFacade.emailIsExist(request.getEmail())) {
+        if(userFacade.emailIsExist(email)) {
             throw UserAlreadyExistException.EXCEPTION;
         }
 
