@@ -65,6 +65,7 @@ public class User {
 
     public void updateInfo(UpdateUserInfoRequest request) {
         this.profileImageUrl = request.getProfileImageUrl() == null ? DefaultImage.USER_PROFILE_IMAGE : getProfileImageUrl();
-        this.name = request.getUsername();
+        this.name = request.getUserName();
     }
+
 }

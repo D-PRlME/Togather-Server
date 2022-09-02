@@ -1,8 +1,6 @@
 package com.project.draw.domain.user.service;
 
-import com.project.draw.domain.auth.domain.RefreshToken;
 import com.project.draw.domain.auth.domain.repository.RefreshTokenRepository;
-import com.project.draw.domain.auth.exception.RefreshTokenNotFoundException;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +19,7 @@ public class LogoutService {
 
         User user = userFacade.getCurrentUser();
 
-        RefreshToken refreshToken = refreshTokenRepository.findByEmail(user.getEmail());
-
-        refreshTokenRepository.delete(refreshToken);
+        refreshTokenRepository.findById(user.getEmail())
+                .ifPresent(refreshTokenRepository::delete);
     }
 }

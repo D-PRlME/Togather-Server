@@ -19,7 +19,7 @@ public class UserFacade {
     }
 
     public User getUserByEmail(String email) {
-        return userRepository.findByAccountId(email)
+        return userRepository.findByEmail(email)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 

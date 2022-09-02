@@ -34,7 +34,7 @@ public class SignupService {
         String name = request.getName();
         String password = request.getPassword();
 
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(email).isPresent()) {
             throw UserAlreadyExistException.EXCEPTION;
         }
 
