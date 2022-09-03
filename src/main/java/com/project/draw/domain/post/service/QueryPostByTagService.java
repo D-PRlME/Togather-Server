@@ -1,9 +1,9 @@
 package com.project.draw.domain.post.service;
 
-import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.Tag;
 import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
+import com.project.draw.domain.post.presentation.dto.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,20 +18,11 @@ public class QueryPostByTagService {
 
     @Transactional
     public PostListResponse execute(Tag tag) {
-        List<PostListResponse.PostResponse> postList = postRepository.findAllByTagsContainsOrderByCreatedAtAsc(tag)
+        List<PostResponse> postList = postRepository.findAllByTagsContainsOrderByCreatedAtAsc(tag)
                 .stream()
-                .map(this::postBuilder)
+                .map(PostResponse::of)
                 .collect(Collectors.toList());
 
         return new PostListResponse(postList);
-    }
-
-    private PostListResponse.PostResponse postBuilder(Post post) {
-        return PostListResponse.PostResponse.builder()
-                .title(post.getTitle())
-                .tags(post.getTags())
-                .user_name(post.getUser().getName())
-                .createdAt(post.getCreatedAt())
-                .build();
     }
 }

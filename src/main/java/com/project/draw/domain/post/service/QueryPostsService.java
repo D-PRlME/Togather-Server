@@ -1,8 +1,8 @@
 package com.project.draw.domain.post.service;
 
-import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
+import com.project.draw.domain.post.presentation.dto.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,21 +18,11 @@ public class QueryPostsService {
 
     @Transactional
     public PostListResponse execute() {
-        List<PostListResponse.PostResponse> postList = postRepository.findAllByOrderByCreatedAtAsc()
+        List<PostResponse> postList = postRepository.findAllByOrderByCreatedAtAsc()
                 .stream()
-                .map(this::postBuilder)
+                .map(PostResponse::of)
                 .collect(Collectors.toList());
 
         return new PostListResponse(postList);
     }
-
-    private PostListResponse.PostResponse postBuilder(Post post) {
-        return PostListResponse.PostResponse.builder()
-                .title(post.getTitle())
-                .tags(post.getTags())
-                .user_name(post.getUser().getName())
-                .createdAt(post.getCreatedAt())
-                .build();
-    }
 }
-
