@@ -31,6 +31,11 @@ public enum ErrorCode {
 
     MAIL_SEND_FAIL(404, "MAIL-404-1","Mail Send Fail"),
 
+    OTHER_BAD_REQUEST(400, "OTHER-400-1", "Other server bad request"),
+    OTHER_UNAUTHORIZED(401, "OTHER-401-1", "Other server unauthorized"),
+    OTHER_FORBIDDEN(403, "OTHER-403-1", "Other server forbidden"),
+    OTHER_EXPIRED_TOKEN(419, "OTHER-419-1", "Other server expired token"),
+
     INTERNAL_SERVER_ERROR(500, "SERVER-500-1", "Internal Server Error");
 
     private final Integer status;
