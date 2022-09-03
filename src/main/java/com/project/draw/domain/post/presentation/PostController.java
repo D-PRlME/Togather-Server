@@ -17,12 +17,16 @@ import javax.validation.Valid;
 @RequestMapping("/posts")
 public class PostController {
     private final CreatePostService createPostService;
+
     private final UpdatePostService updatePostService;
+
     private final QueryMyPostService queryMyPostService;
     private final QueryPostsService queryPostsService;
     private final QueryPostInfoService queryPostInfoService;
     private final QueryPostByTagService queryPostByTagService;
     private final QueryPostByKeywordService queryPostByKeywordService;
+
+    private final DeletePostService deletePostService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -64,6 +68,6 @@ public class PostController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{post-id}")
     public void deletePost(@PathVariable("post-id")Long id) {
-
+        deletePostService.execute(id);
     }
 }
