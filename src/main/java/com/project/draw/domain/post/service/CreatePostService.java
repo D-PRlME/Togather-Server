@@ -17,9 +17,8 @@ public class CreatePostService {
 
     @Transactional
     public void execute(CreatePostRequest request) {
+
         User user = userFacade.getCurrentUser();
-
-
 
         postRepository.save(
                 Post.builder()

@@ -1,9 +1,8 @@
 package com.project.draw.domain.post.service;
 
-import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
-import com.project.draw.domain.post.presentation.dto.response.PostListResponse.PostResponse;
+import com.project.draw.domain.post.presentation.dto.response.PostResponse;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,18 +22,9 @@ public class QueryMyPostService {
     public PostListResponse execute() {
         List<PostResponse> myPostList = postRepository.findAllByUserOrderByCreatedAtAsc(userFacade.getCurrentUser())
                 .stream()
-                .map(this::postBuilder)
+                .map(PostResponse::of)
                 .collect(Collectors.toList());
 
         return new PostListResponse(myPostList);
-    }
-
-    private PostResponse postBuilder(Post post) {
-        return PostResponse.builder()
-                .title(post.getTitle())
-                .tags(post.getTags())
-                .user_name(post.getUser().getName())
-                .createdAt(post.getCreatedAt())
-                .build();
     }
 }
