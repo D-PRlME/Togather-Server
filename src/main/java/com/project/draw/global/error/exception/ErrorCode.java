@@ -30,7 +30,7 @@ public enum ErrorCode {
     IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
 
     MAIL_SEND_FAIL(404, "MAIL-404-1","Mail Send Fail"),
-    
+
     OTHER_BAD_REQUEST(400, "OTHER-400-1", "Other server bad request"),
     OTHER_UNAUTHORIZED(401, "OTHER-401-1", "Other server unauthorized"),
     OTHER_FORBIDDEN(403, "OTHER-403-1", "Other server forbidden"),
