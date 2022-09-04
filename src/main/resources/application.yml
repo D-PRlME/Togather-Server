@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       format_sql: true
       generate-ddl: false
@@ -58,7 +58,8 @@ jwt:
   refresh-exp: ${REFRESH-EXP}
 
 auth:
-    base-url: ${GOOGLE_BASE_URL}
-    client-id: ${GOOGLE_CLIENT}
-    client-secret: ${GOOGLE_SECRET}
-    redirect-url: ${GOOGLE_REDIRECT_URL}
+  google:
+    base-url: ${GOOGLE-BASE-URL}
+    client-id: ${GOOGLE-CLIENT-ID}
+    client-secret: ${GOOGLE-SECRET}
+    redirect-url: ${GOOGLE-REDIRECT-URL}
