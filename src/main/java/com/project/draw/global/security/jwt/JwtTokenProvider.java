@@ -9,6 +9,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,7 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class JwtTokenProvider{
+public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
@@ -45,10 +46,11 @@ public class JwtTokenProvider{
     }
 
     private String createToken(String email, String typ, Long exp) {
+
         return Jwts.builder()
                 .setSubject(email)
                 .claim("typ", typ)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                .signWith(Keys.hmacShaKeyFor(jwtProperties.getSecretKey().getBytes()), SignatureAlgorithm.HS256)
                 .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .setIssuedAt(new Date())
                 .compact();
@@ -80,6 +82,7 @@ public class JwtTokenProvider{
     public String resolveToken(HttpServletRequest request) {
 
         String bearerToken = request.getHeader(jwtProperties.getHeader());
+
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtProperties.getPrefix())
                 && bearerToken.length() > jwtProperties.getPrefix().length() + 1) {
             return bearerToken.substring(jwtProperties.getPrefix().length() + 1);
