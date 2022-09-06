@@ -55,7 +55,7 @@ public class PostController {
         return queryPostInfoService.execute(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("/tag")
     public PostListResponse queryPostByTag(@RequestParam(value = "tag")Tag tag) {
         return queryPostByTagService.execute(tag);
     }
