@@ -38,7 +38,6 @@ public class User {
     @Size(max = 30)
     private String name;
 
-    @NotNull
     @Size(max = 60)
     private String password;
 
