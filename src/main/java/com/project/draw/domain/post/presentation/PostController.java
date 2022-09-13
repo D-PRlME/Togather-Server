@@ -5,6 +5,7 @@ import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.project.draw.domain.post.presentation.dto.response.PostInfoResponse;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
+import com.project.draw.domain.post.presentation.dto.response.TagListResponse;
 import com.project.draw.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class PostController {
     private final QueryPostByKeywordService queryPostByKeywordService;
 
     private final DeletePostService deletePostService;
+    private final QueryTagsService queryTagsService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -53,6 +55,11 @@ public class PostController {
     @GetMapping("/{post-id}")
     public PostInfoResponse queryPostInfo(@PathVariable("post-id") Long id) {
         return queryPostInfoService.execute(id);
+    }
+
+    @GetMapping("/tag/list")
+    public TagListResponse queryTagsService() {
+        return queryTagsService.execute();
     }
 
     @GetMapping("/tag")
