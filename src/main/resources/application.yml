@@ -63,3 +63,9 @@ auth:
     client-id: ${GOOGLE-CLIENT-ID}
     client-secret: ${GOOGLE-SECRET}
     redirect-url: ${GOOGLE-REDIRECT-URL}
+
+sentry:
+  dsn: ${SENTRY-DSN}
+  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
+  # We recommend adjusting this value in production.
+  traces-sample-rate: 1.0
