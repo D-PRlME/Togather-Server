@@ -1,15 +1,31 @@
 package com.project.draw.domain.post.presentation;
 
-import com.project.draw.domain.post.domain.Tag;
 import com.project.draw.domain.post.presentation.dto.request.CreatePostRequest;
 import com.project.draw.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.project.draw.domain.post.presentation.dto.response.PostInfoResponse;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
 import com.project.draw.domain.post.presentation.dto.response.TagListResponse;
-import com.project.draw.domain.post.service.*;
+import com.project.draw.domain.post.service.CreatePostService;
+import com.project.draw.domain.post.service.DeletePostService;
+import com.project.draw.domain.post.service.QueryMyPostService;
+import com.project.draw.domain.post.service.QueryPostByKeywordService;
+import com.project.draw.domain.post.service.QueryPostByTagService;
+import com.project.draw.domain.post.service.QueryPostInfoService;
+import com.project.draw.domain.post.service.QueryPostsService;
+import com.project.draw.domain.post.service.QueryTagsService;
+import com.project.draw.domain.post.service.UpdatePostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -63,11 +79,11 @@ public class PostController {
     }
 
     @GetMapping("/tag")
-    public PostListResponse queryPostByTag(@RequestParam(value = "tag")Tag tag) {
+    public PostListResponse queryPostByTag(@RequestParam(value = "tag")String tag) {
         return queryPostByTagService.execute(tag);
     }
 
-    @GetMapping("/")
+    @GetMapping("/title")
     public PostListResponse queryPostByKeyword(@RequestParam(value = "title")String keyword) {
         return queryPostByKeywordService.execute(keyword);
     }
