@@ -1,7 +1,11 @@
 package com.project.draw.domain.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @AllArgsConstructor
 public enum Tag {
     SPRINGBOOT("SpringBoot", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
