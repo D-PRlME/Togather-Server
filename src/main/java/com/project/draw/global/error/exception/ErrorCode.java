@@ -22,9 +22,10 @@ public enum ErrorCode {
     UNVERIFIED_EMAIL(401, "USER-401-1", "Unverified Email"),
     PASSWORD_NOT_VALID(401, "USER-401-2", "Password Not Valid"),
     USER_NOT_FOUND(404, "USER-404-2", "User Not Found" ),
-
-    POST_NOT_FOUND(404, "USER-404-3", "Post Not Found" ),
     USER_ALREADY_EXIST(409, "USER-409-1", "User Already Exist"),
+
+    BAD_TAG(400, "POST-400-1", "Non-existent Tag"),
+    POST_NOT_FOUND(404, "POST-404-1", "Post Not Found" ),
 
     IMAGE_SAVE_FAIL(400, "IMAGE-400-1", "Image Save Fail"),
     IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
