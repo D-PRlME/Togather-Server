@@ -11,16 +11,21 @@ import java.util.List;
 @Getter
 @Builder
 public class PostResponse {
+
+    private final Long postId;
     private final String title;
     private final String userName;
+    private final String userProfileImage;
     private final List<Tag> tags;
     private final LocalDateTime createdAt;
 
     public static PostResponse of(Post post) {
         return PostResponse.builder()
+                .postId(post.getId())
                 .title(post.getTitle())
                 .tags(post.getTags())
                 .userName(post.getUser().getName())
+                .userProfileImage(post.getUser().getProfileImageUrl())
                 .createdAt(post.getCreatedAt())
                 .build();
     }

@@ -68,7 +68,7 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public PostListResponse queryPostByKeyword(@RequestParam(value = "keyword")String keyword) {
+    public PostListResponse queryPostByKeyword(@RequestParam(value = "title")String keyword) {
         return queryPostByKeywordService.execute(keyword);
     }
 

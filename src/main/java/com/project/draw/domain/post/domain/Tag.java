@@ -1,26 +1,26 @@
 package com.project.draw.domain.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @AllArgsConstructor
 public enum Tag {
-    SPRING_BOOT("SpringBoot", ""),
-    MYSQL("MySQL", ""),
-    NODE_JS("Node.js", ""),
-    FRONTEND("FrontEnd", ""),
-    REACT("React", ""),
-    VUE_JS("Vue.js", ""),
-    SWIFT("Swift", ""),
-    JAVA("Java", ""),
-    JAVASCRIPT("JavaScript", "");
+    SPRINGBOOT("SpringBoot", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    MYSQL("MySQL", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    NODE_JS("Node.js", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    BACKEND("BackEnd", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    FRONTEND("FrontEnd", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    REACT("React", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    VUE_JS("Vue.js", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    SWIFT("Swift", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    JAVA("Java", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
+    JAVASCRIPT("JavaScript", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png");
 
     private final String name;
 
-    private final String image_url;
+    private final String imageUrl;
 
 }
