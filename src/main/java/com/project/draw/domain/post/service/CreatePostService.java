@@ -33,7 +33,7 @@ public class CreatePostService {
 
             savePost(request, tags, user);
 
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw BadTagException.EXCEPTION;
         }
     }
