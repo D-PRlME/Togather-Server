@@ -6,6 +6,7 @@ import com.project.draw.domain.auth.presentation.dto.response.TokenResponse;
 import com.project.draw.domain.user.domain.Authority;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
+import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.global.image.DefaultImage;
 import com.project.draw.global.properties.AuthProperties;
 import com.project.draw.global.security.jwt.JwtProperties;
@@ -31,6 +32,7 @@ public class GoogleAuthService {
     private final AuthProperties authProperties;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final AuthCodeFacade authCodeFacade;
     private final JwtProperties jwtProperties;
     private final RefreshTokenRepository refreshTokenRepository;
 
@@ -50,6 +52,8 @@ public class GoogleAuthService {
 
         String email = googleInfoResponse.getEmail();
         String name = googleInfoResponse.getName();
+
+        authCodeFacade.checkEmailDomain(email);
 
         String refreshToken = jwtTokenProvider.createRefreshToken(email);
 
