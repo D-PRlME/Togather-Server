@@ -34,6 +34,8 @@ public class SignupService {
         String name = request.getName();
         String password = request.getPassword();
 
+        authCodeFacade.checkEmailDomain(email);
+
         if (userRepository.findByEmail(email).isPresent()) {
             throw UserAlreadyExistException.EXCEPTION;
         }
