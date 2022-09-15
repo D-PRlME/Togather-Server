@@ -4,18 +4,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.draw.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity(debug = false)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+@EnableWebSecurity(debug = false)
+public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final ObjectMapper objectMapper;
@@ -25,10 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        httpSecurity
+        return http
                 .csrf().disable()
                 .exceptionHandling()
 
@@ -43,11 +45,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .anyRequest().permitAll()
+
+                //user
+                .antMatchers(HttpMethod.POST, "/users/mail/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/mail/verify").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/auth").permitAll()
+                .antMatchers(HttpMethod.PUT, "/users/auth").permitAll()
+                .anyRequest().authenticated()
 
                 .and()
-                .apply(new FilterConfig(jwtTokenProvider, objectMapper));
+                .apply(new FilterConfig(jwtTokenProvider, objectMapper))
+                .and().build();
 
     }
-
 }
