@@ -29,17 +29,20 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
-	implementation 'com.corundumstudio.socketio:netty-socketio:1.7.20'
+	implementation 'com.corundumstudio.socketio:netty-socketio:1.7.19'
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	runtimeOnly 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	implementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mockito:mockito-inline:4.2.0'
 }
 
 tasks.named('test') {
