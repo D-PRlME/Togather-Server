@@ -1,5 +1,6 @@
 package com.project.draw.global.security.jwt;
 
+import com.corundumstudio.socketio.SocketIOClient;
 import com.project.draw.domain.auth.domain.RefreshToken;
 import com.project.draw.domain.auth.domain.repository.RefreshTokenRepository;
 import com.project.draw.global.exception.ExpiredTokenException;
@@ -83,6 +84,17 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest request) {
 
         String bearerToken = request.getHeader(jwtProperties.getHeader());
+
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtProperties.getPrefix())
+                && bearerToken.length() > jwtProperties.getPrefix().length() + 1) {
+            return bearerToken.substring(jwtProperties.getPrefix().length() + 1);
+        }
+        return null;
+    }
+
+    public String resolveToken(SocketIOClient socketIOClient) {
+
+        String bearerToken = socketIOClient.getHandshakeData().getHttpHeaders().get(jwtProperties.getHeader());
 
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtProperties.getPrefix())
                 && bearerToken.length() > jwtProperties.getPrefix().length() + 1) {
