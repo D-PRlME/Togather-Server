@@ -8,7 +8,7 @@ import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
 import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.global.image.DefaultImage;
-import com.project.draw.global.properties.AuthProperties;
+import com.project.draw.global.security.AuthProperties;
 import com.project.draw.global.security.jwt.JwtProperties;
 import com.project.draw.global.security.jwt.JwtTokenProvider;
 import com.project.draw.infrastructure.feign.client.GoogleAuth;
