@@ -1,4 +1,4 @@
-package com.project.draw.global.properties;
+package com.project.draw.global.security;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

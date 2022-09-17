@@ -1,6 +1,6 @@
 package com.project.draw.global.util.auth.service;
 
-import com.project.draw.global.properties.AuthProperties;
+import com.project.draw.global.security.AuthProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
