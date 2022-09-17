@@ -30,13 +30,19 @@ public enum ErrorCode {
     IMAGE_SAVE_FAIL(400, "IMAGE-400-1", "Image Save Fail"),
     IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
 
+    USER_NOT_INVITED(404, "PROJECT-404", "User Not Invited"),
+
     MAIL_SEND_FAIL(404, "MAIL-404-1","Mail Send Fail"),
+
+    ROOM_NOT_FOUND(404, "ROOM-404-1", "Room Not Found"),
+    ROOM_USER_NOT_FOUND(404, "ROOM-404-2", "Room User Not Found"),
 
     OTHER_BAD_REQUEST(400, "OTHER-400-1", "Other server bad request"),
     OTHER_UNAUTHORIZED(401, "OTHER-401-1", "Other server unauthorized"),
     OTHER_FORBIDDEN(403, "OTHER-403-1", "Other server forbidden"),
     OTHER_EXPIRED_TOKEN(419, "OTHER-419-1", "Other server expired token"),
 
+    FORBIDDEN(403, "COMMON-403-1", "Forbidden"),
     INTERNAL_SERVER_ERROR(500, "SERVER-500-1", "Internal Server Error");
 
     private final Integer status;
