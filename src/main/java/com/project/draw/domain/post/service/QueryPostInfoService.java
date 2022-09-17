@@ -12,15 +12,9 @@ public class QueryPostInfoService {
     private final PostFacade postFacade;
 
     public PostInfoResponse execute(Long id) {
+
         Post post = postFacade.getPostById(id);
 
-        return PostInfoResponse.builder()
-                .title(post.getTitle())
-                .userName(post.getUser().getName())
-                .content(post.getContent())
-                .link(post.getLink())
-                .tags(post.getTags())
-                .createdAt(post.getCreatedAt())
-                .build();
+        return PostInfoResponse.of(post);
     }
 }
