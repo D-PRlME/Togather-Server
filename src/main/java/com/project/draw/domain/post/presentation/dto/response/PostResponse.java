@@ -2,10 +2,10 @@ package com.project.draw.domain.post.presentation.dto.response;
 
 import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.Tag;
+import com.project.draw.global.util.date.DateUtil;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,7 +17,7 @@ public class PostResponse {
     private final String userName;
     private final String userProfileImage;
     private final List<Tag> tags;
-    private final LocalDateTime createdAt;
+    private final String createdAt;
 
     public static PostResponse of(Post post) {
         return PostResponse.builder()
@@ -26,7 +26,7 @@ public class PostResponse {
                 .tags(post.getTags())
                 .userName(post.getUser().getName())
                 .userProfileImage(post.getUser().getProfileImageUrl())
-                .createdAt(post.getCreatedAt())
+                .createdAt(DateUtil.createdAtToString(post.getCreatedAt()))
                 .build();
     }
 }
