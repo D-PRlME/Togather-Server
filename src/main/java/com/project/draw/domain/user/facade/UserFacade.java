@@ -1,8 +1,10 @@
 package com.project.draw.domain.user.facade;
 
+import com.corundumstudio.socketio.SocketIOClient;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
 import com.project.draw.domain.user.exception.UserNotFoundException;
+import com.project.draw.global.socket.util.SocketUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,10 @@ public class UserFacade {
     public User getCurrentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return getUserByEmail(email);
+    }
+
+    public User getCurrentUser(SocketIOClient socketIOClient) {
+        return getUserByEmail(SocketUtil.getEmail(socketIOClient));
     }
 
     public User getUserByEmail(String email) {
