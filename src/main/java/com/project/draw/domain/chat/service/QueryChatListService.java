@@ -1,6 +1,7 @@
 package com.project.draw.domain.chat.service;
 
 import com.project.draw.domain.chat.domain.repository.ChatRepository;
+import com.project.draw.domain.chat.presentation.dto.response.ChatResponse;
 import com.project.draw.domain.chat.presentation.dto.response.QueryChatListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public class QueryChatListService {
         return new QueryChatListResponse(
                 chatRepository.findByRoomIdOrderByIdDesc(roomId, pageable)
                         .stream()
-                        .map(QueryChatListResponse::of)
+                        .map(ChatResponse::of)
                         .collect(Collectors.toList())
         );
     }
