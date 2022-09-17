@@ -2,6 +2,7 @@ package com.project.draw.domain.chat.presentation;
 
 import com.project.draw.domain.chat.domain.enums.RoomType;
 import com.project.draw.domain.chat.presentation.dto.response.QueryChatListResponse;
+import com.project.draw.domain.chat.presentation.dto.response.QueryRoomListResponse;
 import com.project.draw.domain.chat.service.QueryChatListService;
 import com.project.draw.domain.chat.service.QueryMyRoomListService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class ChatController {
     }
 
     @GetMapping("/{room-type}")
-    public QueryChatListResponse queryMyRoomList(@PathVariable("room-type") RoomType roomType) {
+    public QueryRoomListResponse queryMyRoomList(@PathVariable("room-type") RoomType roomType) {
         return queryMyRoomListService.execute(roomType);
     }
 
