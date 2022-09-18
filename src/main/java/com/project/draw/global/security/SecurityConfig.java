@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .authorizeRequests()
 
                 //user
+                .antMatchers(HttpMethod.POST, "/users/mail/duplicate").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/mail/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/mail/verify").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/").permitAll()
