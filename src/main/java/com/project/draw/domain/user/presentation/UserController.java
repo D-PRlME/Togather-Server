@@ -65,6 +65,7 @@ public class UserController {
     private final LogoutService logoutService;
     private final WithdrawalService withdrawalService;
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/mail/duplicate")
     public void checkEmail(@RequestBody @Valid CheckEmailRequest request){
         checkEmailService.execute(request);
