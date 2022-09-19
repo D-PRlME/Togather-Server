@@ -18,6 +18,7 @@ public class PostResponse {
     private final String userProfileImage;
     private final List<Tag> tags;
     private final String createdAt;
+    private final boolean isComplete;
 
     public static PostResponse of(Post post) {
         return PostResponse.builder()
@@ -27,6 +28,7 @@ public class PostResponse {
                 .userName(post.getUser().getName())
                 .userProfileImage(post.getUser().getProfileImageUrl())
                 .createdAt(DateUtil.createdAtToString(post.getCreatedAt()))
+                .isComplete(post.isComplete())
                 .build();
     }
 }

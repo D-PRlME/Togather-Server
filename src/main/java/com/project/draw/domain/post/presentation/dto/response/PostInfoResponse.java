@@ -17,6 +17,7 @@ public class PostInfoResponse {
     private final List<Tag> tags;
     private final String content;
     private final String link;
+    private final boolean isComplete;
 
     public static PostInfoResponse of(Post post) {
         return PostInfoResponse
@@ -28,6 +29,7 @@ public class PostInfoResponse {
                 .tags(post.getTags())
                 .createdAt(post.getCreatedAt()
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .isComplete(post.isComplete())
                 .build();
     }
 }
