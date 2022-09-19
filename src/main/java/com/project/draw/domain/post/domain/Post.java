@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,11 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private List<Tag> tags = new ArrayList<>();
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String link;
+
+    @NotNull
+    private boolean isComplete;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
@@ -44,13 +48,15 @@ public class Post extends BaseTimeEntity {
         this.tags = tags;
         this.link = link;
         this.user = user;
+        this.isComplete = false;
     }
 
 
-    public void updatePost(String title, String content, List<Tag> tags, String link) {
+    public void updatePost(String title, String content, List<Tag> tags, String link, boolean isComplete) {
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.link = link;
+        this.isComplete = isComplete;
     }
 }

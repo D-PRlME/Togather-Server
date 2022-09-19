@@ -4,6 +4,7 @@ import com.project.draw.domain.post.domain.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -23,6 +24,9 @@ public class UpdatePostRequest {
     @NotNull(message = "tags는 null일 수 없습니다")
     private List<Tag> tags;
 
-    @NotNull(message = "link는 null일 수 없습니다")
+    @NotBlank(message = "link는 null, 공백을 포함할 수 없습니다")
     private String link;
+
+    @NotNull(message = "is_complite는 null일 수 없습니다")
+    private boolean isComplete;
 }
