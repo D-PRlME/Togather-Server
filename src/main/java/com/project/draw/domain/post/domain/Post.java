@@ -33,6 +33,9 @@ public class Post extends BaseTimeEntity {
     @Column(nullable = true)
     private String link;
 
+    @Column(nullable = false)
+    private boolean isComplete;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     private User user;
@@ -44,13 +47,15 @@ public class Post extends BaseTimeEntity {
         this.tags = tags;
         this.link = link;
         this.user = user;
+        this.isComplete = false;
     }
 
 
-    public void updatePost(String title, String content, List<Tag> tags, String link) {
+    public void updatePost(String title, String content, List<Tag> tags, String link, boolean isComplete) {
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.link = link;
+        this.isComplete = isComplete;
     }
 }
