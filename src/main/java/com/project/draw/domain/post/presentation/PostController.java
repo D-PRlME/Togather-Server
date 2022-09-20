@@ -8,13 +8,14 @@ import com.project.draw.domain.post.presentation.dto.response.TagListResponse;
 import com.project.draw.domain.post.service.CreatePostService;
 import com.project.draw.domain.post.service.DeletePostService;
 import com.project.draw.domain.post.service.QueryMyPostService;
-import com.project.draw.domain.post.service.QueryPostByKeywordService;
-import com.project.draw.domain.post.service.QueryPostByTagService;
+import com.project.draw.domain.post.service.QueryPostsByKeywordService;
+import com.project.draw.domain.post.service.QueryPostsByTagService;
 import com.project.draw.domain.post.service.QueryPostInfoService;
 import com.project.draw.domain.post.service.QueryPostsService;
 import com.project.draw.domain.post.service.QueryTagsService;
 import com.project.draw.domain.post.service.UpdatePostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,11 +40,12 @@ public class PostController {
 
     private final QueryMyPostService queryMyPostService;
     private final QueryPostsService queryPostsService;
+    private final QueryPostsByTagService queryPostsByTagService;
+    private final QueryPostsByKeywordService queryPostsByKeywordService;
     private final QueryPostInfoService queryPostInfoService;
-    private final QueryPostByTagService queryPostByTagService;
-    private final QueryPostByKeywordService queryPostByKeywordService;
 
     private final DeletePostService deletePostService;
+
     private final QueryTagsService queryTagsService;
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,13 +61,23 @@ public class PostController {
     }
 
     @GetMapping("/my")
-    public PostListResponse queryMyPosts() {
-        return queryMyPostService.execute();
+    public PostListResponse queryMyPosts(Sort sort) {
+        return queryMyPostService.execute(sort);
     }
 
     @GetMapping
-    public PostListResponse queryPosts() {
-        return queryPostsService.execute();
+    public PostListResponse queryPosts(Sort sort) {
+        return queryPostsService.execute(sort);
+    }
+
+    @GetMapping("/tag")
+    public PostListResponse queryPostByTag(@RequestParam(value = "tag")String tag, Sort sort) {
+        return queryPostsByTagService.execute(tag, sort);
+    }
+
+    @GetMapping("/title")
+    public PostListResponse queryPostByKeyword(@RequestParam(value = "title")String keyword, Sort sort) {
+        return queryPostsByKeywordService.execute(keyword, sort);
     }
 
     @GetMapping("/{post-id}")
@@ -73,24 +85,15 @@ public class PostController {
         return queryPostInfoService.execute(id);
     }
 
-    @GetMapping("/tag/list")
-    public TagListResponse queryTagsService() {
-        return queryTagsService.execute();
-    }
-
-    @GetMapping("/tag")
-    public PostListResponse queryPostByTag(@RequestParam(value = "tag")String tag) {
-        return queryPostByTagService.execute(tag);
-    }
-
-    @GetMapping("/title")
-    public PostListResponse queryPostByKeyword(@RequestParam(value = "title")String keyword) {
-        return queryPostByKeywordService.execute(keyword);
-    }
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{post-id}")
     public void deletePost(@PathVariable("post-id")Long id) {
         deletePostService.execute(id);
     }
+
+    @GetMapping("/tag/list")
+    public TagListResponse queryTags() {
+        return queryTagsService.execute();
+    }
+
 }

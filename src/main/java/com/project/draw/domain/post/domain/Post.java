@@ -6,9 +6,19 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +37,7 @@ public class Post extends BaseTimeEntity {
     @Column(length = 1000, nullable = false)
     private String content;
 
+    @BatchSize(size = 50)
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<Tag> tags = new ArrayList<>();
@@ -34,8 +45,8 @@ public class Post extends BaseTimeEntity {
     @Column(nullable = false)
     private String link;
 
-    @NotNull
-    private boolean isComplete;
+    @Column(nullable = false)
+    private boolean isComplete = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
@@ -48,9 +59,7 @@ public class Post extends BaseTimeEntity {
         this.tags = tags;
         this.link = link;
         this.user = user;
-        this.isComplete = false;
     }
-
 
     public void updatePost(String title, String content, List<Tag> tags, String link, boolean isComplete) {
         this.title = title;
