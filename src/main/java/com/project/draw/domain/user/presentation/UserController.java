@@ -83,6 +83,7 @@ public class UserController {
         verifyAuthCodeService.execute(request);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public TokenResponse signup(@RequestBody @Valid SignupRequest request){
         return signupService.execute(request);
