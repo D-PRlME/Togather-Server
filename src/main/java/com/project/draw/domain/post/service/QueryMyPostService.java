@@ -5,6 +5,7 @@ import com.project.draw.domain.post.presentation.dto.response.PostListResponse;
 import com.project.draw.domain.post.presentation.dto.response.PostResponse;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,8 @@ public class QueryMyPostService {
     private final UserFacade userFacade;
 
     @Transactional
-    public PostListResponse execute() {
-        List<PostResponse> myPostList = postRepository.findAllByUserOrderByCreatedAtAsc(userFacade.getCurrentUser())
+    public PostListResponse execute(Sort sort) {
+        List<PostResponse> myPostList = postRepository.findByUser(userFacade.getCurrentUser(), sort)
                 .stream()
                 .map(PostResponse::of)
                 .collect(Collectors.toList());
