@@ -1,28 +1,28 @@
 package com.project.draw.domain.post.service;
 
+import com.project.draw.domain.post.domain.Like;
 import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.repository.LikeRepository;
-import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.facade.PostFacade;
+import com.project.draw.domain.user.domain.User;
+import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class DeletePostService {
+public class AddLikeService {
+    private final UserFacade userFacade;
     private final PostFacade postFacade;
-    private final PostRepository postRepository;
-
     private final LikeRepository likeRepository;
 
     public void execute(Long id) {
-
         Post post = postFacade.getPostById(id);
-
-        postFacade.checkUser(post);
-
-        postRepository.delete(postFacade.getPostById(id));
-
-        likeRepository.deleteAllByPost(post);
+        User user = userFacade.getCurrentUser();
+        likeRepository.save(Like
+                .builder()
+                .user(user)
+                .post(post)
+                .build());
     }
 }
