@@ -41,9 +41,6 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Like> likeList;
-
     @Builder
     public Post(String title, String content, List<Tag> tags, String link, User user) {
         this.title = title;
@@ -61,13 +58,5 @@ public class Post extends BaseTimeEntity {
         this.tags = tags;
         this.link = link;
         this.isComplete = isComplete;
-    }
-
-    public void addLike(Like like) {
-        this.likeList.add(Like
-                .builder()
-                .post(this)
-                .user(user)
-                .build());
     }
 }
