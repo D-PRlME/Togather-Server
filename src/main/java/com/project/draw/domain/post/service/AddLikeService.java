@@ -19,10 +19,10 @@ public class AddLikeService {
     public void execute(Long id) {
         Post post = postFacade.getPostById(id);
         User user = userFacade.getCurrentUser();
-        post.addLike(likeRepository.save(Like
+        likeRepository.save(Like
                 .builder()
                 .user(user)
                 .post(post)
-                .build()));
+                .build());
     }
 }
