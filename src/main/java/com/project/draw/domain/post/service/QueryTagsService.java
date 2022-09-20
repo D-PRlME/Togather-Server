@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class QueryTagsService {
 
+
     public TagListResponse execute(){
     return new TagListResponse(
         Arrays

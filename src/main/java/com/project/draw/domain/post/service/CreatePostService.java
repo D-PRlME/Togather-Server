@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class CreatePostService {
-
     private final PostRepository postRepository;
     private final UserFacade userFacade;
 
@@ -47,7 +46,6 @@ public class CreatePostService {
                         .tags(tags)
                         .link(request.getLink())
                         .user(user)
-                        .build()
-        );
+                        .build());
     }
 }
