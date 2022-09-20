@@ -30,7 +30,7 @@ public class InviteUserService {
 
         User userToInvite = userFacade.getUserById(request.getUserId());
 
-        ProjectInvitation projectInvitation = projectInvitationRepository.save(ProjectInvitation
+        projectInvitationRepository.save(ProjectInvitation
                 .builder()
                 .user(userToInvite)
                 .project(project)
