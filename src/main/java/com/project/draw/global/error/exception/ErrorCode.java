@@ -30,7 +30,8 @@ public enum ErrorCode {
     IMAGE_SAVE_FAIL(400, "IMAGE-400-1", "Image Save Fail"),
     IMAGE_VALUE_NOT_FOUND(404, "IMAGE-404-1", "Image Value Not Found"),
 
-    USER_NOT_INVITED(404, "PROJECT-404", "User Not Invited"),
+    PROJECT_NOT_FOUND(404, "PROJECT-404-1", "Project Not Found"),
+    USER_NOT_INVITED(404, "PROJECT-404-2", "User Not Invited"),
 
     MAIL_SEND_FAIL(404, "MAIL-404-1","Mail Send Fail"),
 

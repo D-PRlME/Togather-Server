@@ -2,6 +2,7 @@ package com.project.draw.domain.project.facade;
 
 import com.project.draw.domain.project.domain.Project;
 import com.project.draw.domain.project.domain.repository.ProjectRepository;
+import com.project.draw.domain.project.exception.ProjectNotFoundException;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.global.exception.ForbiddenException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class ProjectFacade {
 
     public Project getProjectById(Long projectId) {
         return projectRepository.findById(projectId)
-                .orElseThrow();
+                .orElseThrow(() -> ProjectNotFoundException.EXCEPTION);
     }
 
     public void checkProjectManager(Project project, User user) {
