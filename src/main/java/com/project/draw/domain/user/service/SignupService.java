@@ -7,7 +7,6 @@ import com.project.draw.domain.user.domain.repository.UserRepository;
 import com.project.draw.domain.user.exception.UserAlreadyExistException;
 import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.domain.user.presentation.dto.request.SignupRequest;
-import com.project.draw.global.image.DefaultImage;
 import com.project.draw.global.security.jwt.JwtProperties;
 import com.project.draw.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +46,6 @@ public class SignupService {
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .authority(Authority.USER)
-                .profileImageUrl(DefaultImage.USER_PROFILE_IMAGE)
                 .build()
         );
 
