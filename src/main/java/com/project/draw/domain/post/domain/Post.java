@@ -49,7 +49,7 @@ public class Post extends BaseTimeEntity {
     private boolean isComplete = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Builder
