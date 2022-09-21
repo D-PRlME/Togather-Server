@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class User {
     private String profileImageUrl;
 
     @NotNull
+    @BatchSize(size = 50)
     @Enumerated(EnumType.STRING)
     @Column(length = 7)
     private Authority authority;

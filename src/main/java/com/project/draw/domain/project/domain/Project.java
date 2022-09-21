@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -41,7 +42,7 @@ public class Project {
     private User projectManager;
 
     @OneToMany(mappedBy = "project")
-    private List<ProjectUser> projectUsers;
+    private final List<ProjectUser> projectUsers = new ArrayList<>();
 
     public void addProjectUsers(User user) {
         this.projectUsers.add(ProjectUser
