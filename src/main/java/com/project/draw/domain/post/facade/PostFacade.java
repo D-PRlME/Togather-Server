@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class PostFacade {
+
     private final UserFacade userFacade;
     private final PostRepository postRepository;
 
@@ -23,4 +24,5 @@ public class PostFacade {
         if(!userFacade.getCurrentUser().equals(post.getUser()))
             throw InvalidUserException.EXCEPTION;
     }
+
 }
