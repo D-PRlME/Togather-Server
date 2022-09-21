@@ -17,4 +17,5 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     List<Post> findByTitleContains(String keyword, Sort sort);
 
     List<Post> findByTagsContains(Tag tag, Sort sort);
+
 }
