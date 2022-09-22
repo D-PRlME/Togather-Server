@@ -6,5 +6,5 @@ import com.project.draw.domain.post.domain.Post;
 import org.springframework.data.repository.CrudRepository;
 
 public interface LikeRepository extends CrudRepository<Like, LikeUserId> {
-    void deleteAllByPost(Post post);
+    int countByPost(Post post);
 }
