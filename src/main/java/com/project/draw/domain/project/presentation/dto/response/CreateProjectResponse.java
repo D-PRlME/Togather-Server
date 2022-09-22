@@ -6,5 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CreateProjectResponse {
-    private Long projectId;
+
+    private final Long projectId;
 }

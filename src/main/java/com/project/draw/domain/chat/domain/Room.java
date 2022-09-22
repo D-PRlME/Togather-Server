@@ -20,7 +20,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -38,7 +37,7 @@ public class Room {
     private RoomType roomType;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<RoomUser> roomUsers = new ArrayList<>();
+    private List<RoomUser> roomUsers;
 
     @OneToOne
     @JoinColumn(name = "project_id")
@@ -78,7 +77,6 @@ public class Room {
         User user2 = roomUsers.get(1).getUser();
         return user1 != user ? user1 : user2;
     }
-
 
     public void addRoomUser(User user) {
         this.roomUsers.add(RoomUser

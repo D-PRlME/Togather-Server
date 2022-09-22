@@ -12,9 +12,8 @@ public class CreateProjectRequest {
     @NotBlank(message = "name은 blank를 허용하지 않습니다.")
     private String name;
 
-    @NotBlank(message = " projectLogoImage는 blank를 허용하지 않습니다.")
-    private String projectLogoImage;
-
     @NotBlank(message = "description은 blank를 허용하지 않습니다.")
     private String description;
+
+    private String projectLogoImage;
 }

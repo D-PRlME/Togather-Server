@@ -1,11 +1,15 @@
 package com.project.draw.domain.project.domain;
 
 import com.project.draw.domain.user.domain.User;
+import com.project.draw.global.image.DefaultImage;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Project {
@@ -35,6 +40,7 @@ public class Project {
     private String description;
 
     @Column
+    @ColumnDefault("'"+ DefaultImage.PROJECT_DEFAULT_IMAGE +"'")
     private String logoImage;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -42,7 +48,7 @@ public class Project {
     private User projectManager;
 
     @OneToMany(mappedBy = "project")
-    private final List<ProjectUser> projectUsers = new ArrayList<>();
+    private List<ProjectUser> projectUsers;
 
     public void addProjectUsers(User user) {
         this.projectUsers.add(ProjectUser
