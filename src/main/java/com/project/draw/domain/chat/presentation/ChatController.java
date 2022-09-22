@@ -1,6 +1,5 @@
 package com.project.draw.domain.chat.presentation;
 
-import com.project.draw.domain.chat.domain.enums.RoomType;
 import com.project.draw.domain.chat.presentation.dto.response.QueryChatListResponse;
 import com.project.draw.domain.chat.presentation.dto.response.QueryRoomListResponse;
 import com.project.draw.domain.chat.service.QueryChatListService;
@@ -25,9 +24,9 @@ public class ChatController {
         return queryChatLIstService.execute(roomId, pageable);
     }
 
-    @GetMapping("/{room-type}")
-    public QueryRoomListResponse queryMyRoomList(@PathVariable("room-type") RoomType roomType) {
-        return queryMyRoomListService.execute(roomType);
+    @GetMapping("/")
+    public QueryRoomListResponse queryMyRoomList() {
+        return queryMyRoomListService.execute();
     }
 
 }

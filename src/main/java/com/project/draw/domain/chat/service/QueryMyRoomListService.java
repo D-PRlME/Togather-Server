@@ -1,7 +1,6 @@
 package com.project.draw.domain.chat.service;
 
-import com.project.draw.domain.chat.domain.enums.RoomType;
-import com.project.draw.domain.chat.domain.repository.RoomRepository;
+import com.project.draw.domain.chat.domain.repository.RoomUserRepository;
 import com.project.draw.domain.chat.presentation.dto.response.QueryRoomListResponse;
 import com.project.draw.domain.chat.presentation.dto.response.RoomResponse;
 import com.project.draw.domain.user.domain.User;
@@ -16,18 +15,18 @@ import java.util.stream.Collectors;
 @Service
 public class QueryMyRoomListService {
 
-    private final RoomRepository roomRepository;
+    private final RoomUserRepository roomUserRepository;
     private final UserFacade userFacade;
 
     @Transactional(readOnly = true)
-    public QueryRoomListResponse execute(RoomType roomType) {
+    public QueryRoomListResponse execute() {
 
         User user = userFacade.getCurrentUser();
 
         return new QueryRoomListResponse(
-                roomRepository.findByRoomTypeAndRoomUsers_user(roomType, user)
+                roomUserRepository.findByUser(user)
                         .stream()
-                        .map(room -> RoomResponse.of(user, room))
+                        .map(roomUser -> RoomResponse.of(user, roomUser.getRoom()))
                         .collect(Collectors.toList())
         );
     }

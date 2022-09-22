@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +22,8 @@ import javax.persistence.ManyToOne;
 public class RoomUser {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private Room room;
 
