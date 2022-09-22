@@ -29,6 +29,8 @@ public class CreateProjectService {
         Project project = projectRepository.save(Project
                 .builder()
                 .name(request.getName())
+                .description(request.getDescription())
+                .logoImage(request.getProjectLogoImage())
                 .projectManager(user)
                 .build());
 

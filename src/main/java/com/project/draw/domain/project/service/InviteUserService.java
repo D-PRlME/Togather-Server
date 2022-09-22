@@ -23,9 +23,8 @@ public class InviteUserService {
     public void execute(InviteUserRequest request) {
 
         User user = userFacade.getCurrentUser();
-        Long projectId = request.getProjectId();
 
-        Project project = projectFacade.getProjectById(projectId);
+        Project project = projectFacade.getProjectById(request.getProjectId());
         projectFacade.checkProjectManager(project, user);
 
         User userToInvite = userFacade.getUserById(request.getUserId());

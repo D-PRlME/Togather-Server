@@ -13,15 +13,11 @@ import java.util.stream.Collectors;
 @Builder
 public class QueryProjectInfoResponse {
 
-    private String name;
-
-    private String description;
-
-    private String projectLogoImage;
-
-    private UserResponse projectManager;
-
-    private List<UserResponse> projectUsers;
+    private final String name;
+    private final String description;
+    private final String projectLogoImage;
+    private final UserResponse projectManager;
+    private final List<UserResponse> projectUsers;
 
     public static QueryProjectInfoResponse of(Project project) {
 

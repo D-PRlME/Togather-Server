@@ -1,5 +1,6 @@
 package com.project.draw.domain.project.service;
 
+import com.project.draw.domain.project.domain.Project;
 import com.project.draw.domain.project.domain.ProjectInvitation;
 import com.project.draw.domain.project.domain.ProjectUserId;
 import com.project.draw.domain.project.domain.repository.ProjectInvitationRepository;
@@ -30,7 +31,15 @@ public class AcceptInviteService {
                         .build())
                 .orElseThrow(() -> UserNotInvitedException.EXCEPTION);
 
-        projectInvitation.getProject().addProjectUsers(user);
+        if (request.getIsAccept()) {
+            joinProject(projectInvitation.getProject(), user);
+        }
+
         projectInvitationRepository.delete(projectInvitation);
     }
+
+    private void joinProject(Project project, User user) {
+        project.addProjectUsers(user);
+    }
+
 }
