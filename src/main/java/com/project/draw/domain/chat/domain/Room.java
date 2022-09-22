@@ -34,6 +34,7 @@ public class Room {
     @Column(name = "room_id")
     private Long id;
 
+    @Column(nullable = false)
     private RoomType roomType;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.PERSIST, orphanRemoval = true)
