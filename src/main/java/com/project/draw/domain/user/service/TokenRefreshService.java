@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class TokenRefreshService {
@@ -34,6 +36,7 @@ public class TokenRefreshService {
         return TokenResponse
                 .builder()
                 .accessToken(newAccessToken)
+                .expiredAt(LocalDateTime.now().plusSeconds(jwtProperties.getAccessExp()))
                 .refreshToken(newRefreshToken)
                 .build();
     }
