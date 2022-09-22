@@ -15,13 +15,13 @@ public class LikeController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/like/{post-id}")
-    public void addLike(@PathVariable ("post-id") Long id) {
+    public void addLike(@PathVariable("post-id") Long id) {
         addLikeService.execute(id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/like/{post-id}")
-    public void deleteLike(@PathVariable ("post-id") Long id) {
+    public void deleteLike(@PathVariable("post-id") Long id) {
         deleteLikeService.execute(id);
     }
 }
