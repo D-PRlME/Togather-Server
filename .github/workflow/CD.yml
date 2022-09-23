@@ -1,5 +1,4 @@
 name: CD
-
 on:
   push:
     branches:
@@ -16,7 +15,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew clean build
 
       - name: build docker image
         run: docker build -t rolls .
