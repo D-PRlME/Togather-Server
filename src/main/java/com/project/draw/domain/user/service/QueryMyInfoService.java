@@ -23,6 +23,8 @@ public class QueryMyInfoService {
                 .name(user.getName())
                 .profileImageUrl(user.getProfileImageUrl())
                 .email(user.getEmail())
+                .introduce(user.getEmail())
+                .positions(user.getPositions())
                 .build();
     }
 }
