@@ -18,6 +18,7 @@ public class QueryPostsByKeywordService {
 
     @Transactional
     public PostListResponse execute(String keyword, Sort sort) {
+
         List<PostResponse> postList = postRepository.findByTitleContains(keyword, sort)
                 .stream()
                 .map(PostResponse::of)

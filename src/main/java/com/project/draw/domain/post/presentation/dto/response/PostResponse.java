@@ -19,6 +19,7 @@ public class PostResponse {
     private final List<Tag> tags;
     private final String createdAt;
     private final Boolean isComplete;
+    private final Integer likeCount;
 
     public static PostResponse of(Post post) {
         return PostResponse.builder()
@@ -28,6 +29,7 @@ public class PostResponse {
                 .user(UserResponse.of(post.getUser()))
                 .createdAt(DateUtil.createdAtToString(post.getCreatedAt()))
                 .isComplete(post.isComplete())
+                .likeCount(post.getLikes().size())
                 .build();
     }
 }

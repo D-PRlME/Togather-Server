@@ -24,7 +24,7 @@ public class QueryPostsByTagService {
 
         try {
             Tag.valueOf(tag);
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw BadTagException.EXCEPTION;
         }
 
