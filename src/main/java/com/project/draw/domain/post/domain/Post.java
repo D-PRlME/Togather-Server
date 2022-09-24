@@ -52,6 +52,9 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Like> likes;
+
     @Builder
     public Post(String title, String content, List<Tag> tags, String link, User user) {
         this.title = title;
