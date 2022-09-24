@@ -10,7 +10,7 @@ import com.project.draw.domain.post.service.DeletePostService;
 import com.project.draw.domain.post.service.QueryMyPostService;
 import com.project.draw.domain.post.service.QueryPostsByKeywordService;
 import com.project.draw.domain.post.service.QueryPostsByTagService;
-import com.project.draw.domain.post.service.QueryPostInfoService;
+import com.project.draw.domain.post.service.QueryPostsInfoService;
 import com.project.draw.domain.post.service.QueryPostsService;
 import com.project.draw.domain.post.service.QueryTagsService;
 import com.project.draw.domain.post.service.UpdatePostService;
@@ -42,7 +42,7 @@ public class PostController {
     private final QueryPostsService queryPostsService;
     private final QueryPostsByTagService queryPostsByTagService;
     private final QueryPostsByKeywordService queryPostsByKeywordService;
-    private final QueryPostInfoService queryPostInfoService;
+    private final QueryPostsInfoService queryPostsInfoService;
 
     private final DeletePostService deletePostService;
 
@@ -82,7 +82,7 @@ public class PostController {
 
     @GetMapping("/{post-id}")
     public PostInfoResponse queryPostInfo(@PathVariable("post-id") Long id) {
-        return queryPostInfoService.execute(id);
+        return queryPostsInfoService.execute(id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
