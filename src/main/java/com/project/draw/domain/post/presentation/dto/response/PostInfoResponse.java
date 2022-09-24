@@ -21,8 +21,10 @@ public class PostInfoResponse {
     private final String content;
     private final String link;
     private final Boolean isComplete;
+    private final Integer likeCount;
+    private final Boolean isLiked;
 
-    public static PostInfoResponse of(User user, Post post) {
+    public static PostInfoResponse of(User user, Post post, boolean isLiked) {
         return PostInfoResponse
                 .builder()
                 .title(post.getTitle())
@@ -34,6 +36,8 @@ public class PostInfoResponse {
                 .content(post.getContent())
                 .link(post.getLink())
                 .isComplete(post.isComplete())
+                .likeCount(post.getLikes().size())
+                .isLiked(isLiked)
                 .build();
     }
 }

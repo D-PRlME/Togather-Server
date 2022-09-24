@@ -13,15 +13,7 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -64,6 +56,14 @@ public class User {
     @Column(length = 7)
     private Authority authority;
 
+    @Column(length = 1000, nullable = true)
+    private String introduce;
+
+    @BatchSize(size = 50)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private List<Position> positions;
+
     @Builder
     public User(String email, String name, String password, String profileImageUrl, Authority authority) {
         this.email = email;
@@ -80,6 +80,8 @@ public class User {
     public void updateInfo(UpdateUserInfoRequest request) {
         this.profileImageUrl = request.getProfileImageUrl() == null ? DefaultImage.USER_PROFILE_IMAGE : getProfileImageUrl();
         this.name = request.getUserName();
+        this.introduce = request.getIntroduce();
+        this.positions = request.getPositions();
     }
 
 }

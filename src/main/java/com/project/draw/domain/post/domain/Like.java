@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 
@@ -16,6 +17,7 @@ import javax.persistence.*;
 public class Like {
 
     @Id
+    @BatchSize(size = 100)
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;

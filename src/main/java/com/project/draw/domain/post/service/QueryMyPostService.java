@@ -21,6 +21,7 @@ public class QueryMyPostService {
 
     @Transactional
     public PostListResponse execute(Sort sort) {
+
         List<PostResponse> myPostList = postRepository.findByUser(userFacade.getCurrentUser(), sort)
                 .stream()
                 .map(PostResponse::of)

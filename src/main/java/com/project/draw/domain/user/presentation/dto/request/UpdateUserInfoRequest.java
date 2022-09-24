@@ -1,9 +1,12 @@
 package com.project.draw.domain.user.presentation.dto.request;
 
+import com.project.draw.domain.user.domain.Position;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -13,4 +16,9 @@ public class UpdateUserInfoRequest {
     private String userName;
 
     private String profileImageUrl;
+
+    @Size(max = 1000)
+    private String introduce;
+    
+    private List<Position> positions;
 }
