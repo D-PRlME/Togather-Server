@@ -26,7 +26,7 @@ public class PostResponse {
                 .title(post.getTitle())
                 .tags(post.getTags())
                 .user(UserResponse.of(post.getUser()))
-                .createdAt(DateUtil.createdAtToString(post.getCreatedAt()))
+                .createdAt(DateUtil.createdAtToString(post.getCreatedAt().toLocalDateTime()))
                 .isComplete(post.isComplete())
                 .build();
     }
