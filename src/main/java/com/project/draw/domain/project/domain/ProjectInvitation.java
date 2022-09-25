@@ -1,5 +1,6 @@
 package com.project.draw.domain.project.domain;
 
+import com.project.draw.domain.project.domain.ProjectUser.ProjectUserId;
 import com.project.draw.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
