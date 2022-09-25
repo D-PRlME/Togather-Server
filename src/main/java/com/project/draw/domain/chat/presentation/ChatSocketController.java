@@ -10,7 +10,9 @@ import com.project.draw.domain.chat.service.JoinSocketRoomService;
 import com.project.draw.domain.chat.service.SendChatService;
 import com.project.draw.global.socket.SocketProperty;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -29,6 +31,7 @@ public class ChatSocketController {
         sendChatService.execute(socketIOServer, socketIOClient, request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @OnEvent(SocketProperty.JOIN)
     public void enterRoom(SocketIOClient socketIOClient, @RequestBody @Valid JoinSocketRoomRequest request){
         joinSocketRoomService.execute(socketIOClient, request);
