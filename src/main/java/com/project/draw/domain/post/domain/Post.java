@@ -1,5 +1,6 @@
 package com.project.draw.domain.post.domain;
 
+import com.project.draw.domain.post.domain.enums.Tag;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;

@@ -1,5 +1,6 @@
 package com.project.draw.domain.project.domain;
 
+import com.project.draw.domain.chat.domain.Room;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.global.image.DefaultImage;
 import lombok.AccessLevel;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -46,6 +45,10 @@ public class Project {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User projectManager;
+
+    @OneToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 
     @OneToMany(mappedBy = "project")
     private List<ProjectUser> projectUsers;
