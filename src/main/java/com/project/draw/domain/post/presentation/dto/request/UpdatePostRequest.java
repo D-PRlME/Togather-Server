@@ -1,6 +1,6 @@
 package com.project.draw.domain.post.presentation.dto.request;
 
-import com.project.draw.domain.post.domain.Tag;
+import com.project.draw.domain.post.domain.enums.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

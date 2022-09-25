@@ -1,4 +1,4 @@
-package com.project.draw.domain.post.domain;
+package com.project.draw.domain.post.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

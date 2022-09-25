@@ -1,6 +1,6 @@
 package com.project.draw.domain.user.presentation.dto.response;
 
-import com.project.draw.domain.user.domain.Position;
+import com.project.draw.domain.user.domain.enums.Position;
 import lombok.Builder;
 import lombok.Getter;
 

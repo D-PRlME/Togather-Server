@@ -3,7 +3,7 @@ package com.project.draw.domain.auth.service;
 import com.project.draw.domain.auth.domain.RefreshToken;
 import com.project.draw.domain.auth.domain.repository.RefreshTokenRepository;
 import com.project.draw.domain.auth.presentation.dto.response.TokenResponse;
-import com.project.draw.domain.user.domain.Authority;
+import com.project.draw.domain.user.domain.enums.Authority;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
 import com.project.draw.domain.user.facade.AuthCodeFacade;

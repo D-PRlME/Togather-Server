@@ -3,6 +3,8 @@ package com.project.draw.domain.user.domain;
 
 import com.project.draw.domain.post.domain.Like;
 import com.project.draw.domain.post.domain.Post;
+import com.project.draw.domain.user.domain.enums.Authority;
+import com.project.draw.domain.user.domain.enums.Position;
 import com.project.draw.domain.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.project.draw.global.image.DefaultImage;
 import lombok.AccessLevel;
@@ -12,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +23,9 @@ import java.util.List;
 
 @Getter
 @DynamicInsert
+@DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@BatchSize(size = 500)
 @Entity
 public class User {
 
@@ -56,11 +61,11 @@ public class User {
     @Column(length = 7)
     private Authority authority;
 
-    @Column(length = 1000, nullable = true)
+    @Column(length = 1000, nullable = false)
     private String introduce;
 
     @BatchSize(size = 50)
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
     private List<Position> positions;
 
@@ -78,7 +83,7 @@ public class User {
     }
 
     public void updateInfo(UpdateUserInfoRequest request) {
-        this.profileImageUrl = request.getProfileImageUrl() == null ? DefaultImage.USER_PROFILE_IMAGE : getProfileImageUrl();
+        this.profileImageUrl = request.getProfileImageUrl();
         this.name = request.getUserName();
         this.introduce = request.getIntroduce();
         this.positions = request.getPositions();
