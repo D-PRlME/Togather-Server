@@ -1,7 +1,7 @@
 package com.project.draw.domain.post.domain.repository;
 
 import com.project.draw.domain.post.domain.Post;
-import com.project.draw.domain.post.domain.Tag;
+import com.project.draw.domain.post.domain.enums.Tag;
 import com.project.draw.domain.user.domain.User;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
