@@ -40,4 +40,4 @@ jobs:
       - name: Docker run
         run: |
           sudo docker stop $(docker ps -a -q  --filter ancestor=${{secrets.DOCKER_REPOSITORY}})
-          sudo nohup docker run -p 8080:8080 ${{secrets.DOCKER_REPOSITORY}} &
+          sudo nohup docker run --env-file ./my_env -p 8080:8080 ${{secrets.DOCKER_REPOSITORY}} &

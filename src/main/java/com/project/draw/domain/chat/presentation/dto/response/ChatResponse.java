@@ -24,7 +24,7 @@ public class ChatResponse {
                 .roomId(chat.getRoom().getId())
                 .user(UserResponse.of(user))
                 .message(chat.getMessage())
-                .createdAt(chat.getCreatedAt())
+                .createdAt(chat.getCreatedAt().toLocalDateTime())
                 .build();
     }
 }

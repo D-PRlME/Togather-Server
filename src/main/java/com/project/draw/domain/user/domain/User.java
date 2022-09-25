@@ -1,6 +1,7 @@
 package com.project.draw.domain.user.domain;
 
 
+import com.project.draw.domain.post.domain.Like;
 import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.project.draw.global.image.DefaultImage;
@@ -43,8 +44,11 @@ public class User {
     @ColumnDefault("'" + DefaultImage.USER_PROFILE_IMAGE + "'")
     private String profileImageUrl;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> post;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Like> likes;
 
     @NotNull
     @BatchSize(size = 50)
