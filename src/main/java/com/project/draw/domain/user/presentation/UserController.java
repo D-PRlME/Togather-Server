@@ -9,6 +9,7 @@ import com.project.draw.domain.user.presentation.dto.request.SignupRequest;
 import com.project.draw.domain.user.presentation.dto.request.UpdatePasswordRequest;
 import com.project.draw.domain.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.project.draw.domain.user.presentation.dto.request.VerifyAuthCodeRequest;
+import com.project.draw.domain.user.presentation.dto.request.WithdrawalRequest;
 import com.project.draw.domain.user.presentation.dto.response.QueryUserInfoResponse;
 import com.project.draw.domain.user.service.CheckEmailService;
 import com.project.draw.domain.user.service.FindPasswordService;
@@ -141,7 +142,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping
-    public void withdrawal(){
-        withdrawalService.execute();
+    public void withdrawal(@RequestBody @Valid WithdrawalRequest request){
+        withdrawalService.execute(request);
     }
 }
