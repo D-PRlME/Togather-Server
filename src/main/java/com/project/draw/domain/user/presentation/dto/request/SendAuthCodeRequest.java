@@ -1,14 +1,15 @@
 package com.project.draw.domain.user.presentation.dto.request;
 
+import com.project.draw.global.util.RegexpProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @NoArgsConstructor
 public class SendAuthCodeRequest {
 
-    @Email
+    @Pattern(regexp = RegexpProperty.EMAIL)
     private String email;
 }

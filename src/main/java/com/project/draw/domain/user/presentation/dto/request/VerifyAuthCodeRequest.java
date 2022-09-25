@@ -1,10 +1,11 @@
 package com.project.draw.domain.user.presentation.dto.request;
 
+import com.project.draw.global.util.RegexpProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -15,6 +16,6 @@ public class VerifyAuthCodeRequest {
     @Size(min = 6, max = 6)
     private String authCode;
 
-    @Email
+    @Pattern(regexp = RegexpProperty.EMAIL)
     private String email;
 }
