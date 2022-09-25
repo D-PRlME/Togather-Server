@@ -1,6 +1,6 @@
 package com.project.draw.domain.post.service;
 
-import com.project.draw.domain.post.domain.Tag;
+import com.project.draw.domain.post.domain.enums.Tag;
 import com.project.draw.domain.post.presentation.dto.response.TagListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

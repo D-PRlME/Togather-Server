@@ -5,6 +5,7 @@ import com.project.draw.domain.user.domain.repository.AuthCodeRepository;
 import com.project.draw.domain.user.exception.BadAuthCodeException;
 import com.project.draw.domain.user.exception.BadEmailException;
 import com.project.draw.domain.user.exception.UnverifiedEmailException;
+import com.project.draw.global.util.RegexpProperty;
 import com.project.draw.global.util.jms.JmsProperties;
 import com.project.draw.global.util.jms.JmsUtil;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class AuthCodeFacade {
     }
 
     public void checkEmailDomain(String email) {
-        if(!email.endsWith(jmsProperties.getSuffix())) {
+        if(!email.matches(RegexpProperty.EMAIL)) {
             throw BadEmailException.EXCEPTION;
         }
     }

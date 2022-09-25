@@ -1,7 +1,7 @@
 package com.project.draw.domain.post.presentation.dto.response;
 
 import com.project.draw.domain.post.domain.Post;
-import com.project.draw.domain.post.domain.Tag;
+import com.project.draw.domain.post.domain.enums.Tag;
 import com.project.draw.domain.user.presentation.dto.response.UserResponse;
 import com.project.draw.global.util.date.DateUtil;
 import lombok.Builder;
@@ -27,7 +27,7 @@ public class PostResponse {
                 .title(post.getTitle())
                 .tags(post.getTags())
                 .user(UserResponse.of(post.getUser()))
-                .createdAt(DateUtil.createdAtToString(post.getCreatedAt().toLocalDateTime()))
+                .createdAt(DateUtil.toTimeAgoFormat(post.getCreatedAt().toLocalDateTime()))
                 .isComplete(post.isComplete())
                 .likeCount(post.getLikes().size())
                 .build();

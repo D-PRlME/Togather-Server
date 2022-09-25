@@ -1,6 +1,6 @@
 package com.project.draw.domain.post.service;
 
-import com.project.draw.domain.post.domain.Tag;
+import com.project.draw.domain.post.domain.enums.Tag;
 import com.project.draw.domain.post.domain.repository.PostRepository;
 import com.project.draw.domain.post.exception.BadTagException;
 import com.project.draw.domain.post.presentation.dto.response.PostListResponse;

@@ -3,10 +3,12 @@ package com.project.draw.domain.user.facade;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.domain.repository.UserRepository;
+import com.project.draw.domain.user.exception.PasswordMismatchException;
 import com.project.draw.domain.user.exception.UserNotFoundException;
 import com.project.draw.global.socket.util.SocketUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 public class UserFacade {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User getCurrentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -36,5 +39,11 @@ public class UserFacade {
 
     public boolean emailIsExist(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+
+    public void checkPassword(User user, String passowrd) {
+        if (!passwordEncoder.matches(passowrd, user.getPassword())) {
+            throw PasswordMismatchException.EXCEPTION;
+        }
     }
 }

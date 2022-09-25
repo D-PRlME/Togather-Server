@@ -1,4 +1,4 @@
-package com.project.draw.domain.user.domain;
+package com.project.draw.domain.user.domain.enums;
 
 public enum Position {
     BACKEND,
