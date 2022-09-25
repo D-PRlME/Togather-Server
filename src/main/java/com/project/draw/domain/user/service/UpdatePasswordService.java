@@ -1,7 +1,6 @@
 package com.project.draw.domain.user.service;
 
 import com.project.draw.domain.user.domain.User;
-import com.project.draw.domain.user.exception.PasswordMismatchException;
 import com.project.draw.domain.user.facade.UserFacade;
 import com.project.draw.domain.user.presentation.dto.request.UpdatePasswordRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,7 @@ public class UpdatePasswordService {
 
         User user = userFacade.getCurrentUser();
 
-        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword()))
-            throw PasswordMismatchException.EXCEPTION;
+        userFacade.checkPassword(user, request.getOldPassword());
 
         user.updatePassword(passwordEncoder.encode(request.getNewPassword()));
     }
