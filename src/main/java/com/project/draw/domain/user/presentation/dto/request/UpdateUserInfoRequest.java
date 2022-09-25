@@ -1,6 +1,6 @@
 package com.project.draw.domain.user.presentation.dto.request;
 
-import com.project.draw.domain.user.domain.Position;
+import com.project.draw.domain.user.domain.enums.Position;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +19,6 @@ public class UpdateUserInfoRequest {
 
     @Size(max = 1000)
     private String introduce;
-    
+
     private List<Position> positions;
 }
