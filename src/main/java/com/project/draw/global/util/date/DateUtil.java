@@ -7,8 +7,6 @@ import java.util.Locale;
 
 public class DateUtil {
 
-    public static DateTimeFormatter meridiemFormetter;
-
     public static String toTimeAgoFormat(LocalDateTime localDateTime) {
 
         LocalDateTime now = LocalDateTime.now();
