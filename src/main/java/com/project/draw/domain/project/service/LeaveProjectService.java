@@ -1,6 +1,6 @@
 package com.project.draw.domain.project.service;
 
-import com.project.draw.domain.project.domain.ProjectUserId;
+import com.project.draw.domain.project.domain.ProjectUser.ProjectUserId;
 import com.project.draw.domain.project.domain.repository.ProjectUserRepository;
 import com.project.draw.domain.project.presentation.dto.request.LeaveProjectRequest;
 import com.project.draw.domain.user.domain.User;

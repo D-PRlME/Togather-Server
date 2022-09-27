@@ -36,7 +36,7 @@ public class CreateProjectService {
 
         Room room = roomRepository.save(Room
                 .builder()
-                .roomType(RoomType.PROJECT)
+                .roomType(RoomType.TEAM)
                 .project(project)
                 .build());
 

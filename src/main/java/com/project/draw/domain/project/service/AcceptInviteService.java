@@ -2,7 +2,7 @@ package com.project.draw.domain.project.service;
 
 import com.project.draw.domain.project.domain.Project;
 import com.project.draw.domain.project.domain.ProjectInvitation;
-import com.project.draw.domain.project.domain.ProjectUserId;
+import com.project.draw.domain.project.domain.ProjectUser.ProjectUserId;
 import com.project.draw.domain.project.domain.repository.ProjectInvitationRepository;
 import com.project.draw.domain.project.exception.UserNotInvitedException;
 import com.project.draw.domain.project.presentation.dto.request.AcceptInviteRequest;

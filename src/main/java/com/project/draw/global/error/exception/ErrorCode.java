@@ -20,7 +20,7 @@ public enum ErrorCode {
     BAD_AUTH_CODE(400, "USER-400-2", "Bad Auth Code"),
 
     UNVERIFIED_EMAIL(401, "USER-401-1", "Unverified Email"),
-    PASSWORD_NOT_VALID(401, "USER-401-2", "Password Not Valid"),
+    PASSWORD_NOT_VALID(403, "USER-403-1", "Password Not Valid"),
     USER_NOT_FOUND(404, "USER-404-2", "User Not Found" ),
     USER_ALREADY_EXIST(409, "USER-409-1", "User Already Exist"),
 
@@ -37,6 +37,7 @@ public enum ErrorCode {
 
     ROOM_NOT_FOUND(404, "ROOM-404-1", "Room Not Found"),
     ROOM_USER_NOT_FOUND(404, "ROOM-404-2", "Room User Not Found"),
+    ROOM_ALREADY_EXIST(409, "ROOM-409-1", "Room Already Exist"),
 
     OTHER_BAD_REQUEST(400, "OTHER-400-1", "Other server bad request"),
     OTHER_UNAUTHORIZED(401, "OTHER-401-1", "Other server unauthorized"),

@@ -8,16 +8,16 @@ import lombok.Getter;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @AllArgsConstructor
 public enum Tag {
-    SPRINGBOOT("SpringBoot", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    MYSQL("MySQL", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    NODE_JS("Node.js", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    BACKEND("BackEnd", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    FRONTEND("FrontEnd", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    REACT("React", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    VUE_JS("Vue.js", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    SWIFT("Swift", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    JAVA("Java", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png"),
-    JAVASCRIPT("JavaScript", "https://myawsbucketswg1214.s3.amazonaws.com/myawsbucketswg1214/tmpimg.png");
+    SPRINGBOOT("SpringBoot", "https://wouldyou1214.s3.amazonaws.com/SPRING.png"),
+    MYSQL("MySQL", "https://wouldyou1214.s3.amazonaws.com/MySQL.png"),
+    NODE_JS("Node.js", "https://wouldyou1214.s3.amazonaws.com/Node.js.png"),
+    BACKEND("BackEnd", "https://wouldyou1214.s3.amazonaws.com/BackEnd.png"),
+    FRONTEND("FrontEnd", "https://wouldyou1214.s3.amazonaws.com/FrontEnd.png"),
+    REACT("React", "https://wouldyou1214.s3.amazonaws.com/React.png"),
+    VUE_JS("Vue.js", "https://wouldyou1214.s3.amazonaws.com/Vue.js.png"),
+    SWIFT("Swift", "https://wouldyou1214.s3.amazonaws.com/Swift.png"),
+    JAVA("Java", "https://wouldyou1214.s3.amazonaws.com/Java.png"),
+    JAVASCRIPT("JavaScript", "https://wouldyou1214.s3.amazonaws.com/JacaScript.png");
 
     private final String name;
 
