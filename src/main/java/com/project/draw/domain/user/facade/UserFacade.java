@@ -24,7 +24,7 @@ public class UserFacade {
     }
 
     public User getCurrentUser(SocketIOClient socketIOClient) {
-        return getUserByEmail(SocketUtil.getEmail(socketIOClient));
+        return getUserById(SocketUtil.getUserId(socketIOClient));
     }
 
     public User getUserByEmail(String email) {
