@@ -5,6 +5,7 @@ import com.project.draw.domain.project.domain.Project;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.exception.UserNotFoundException;
 import com.project.draw.global.image.DefaultImage;
+import com.project.draw.global.util.date.DateUtil;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,8 +22,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +116,6 @@ public class Room {
     @Embeddable
     public static class LastChat {
         private String lastMessage = "";
-        private ZonedDateTime lastSentAt = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+        private LocalDateTime lastSentAt = DateUtil.getZonedNow();
     }
 }

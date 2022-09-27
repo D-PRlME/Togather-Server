@@ -27,7 +27,7 @@ public class PostResponse {
                 .title(post.getTitle())
                 .tags(post.getTags())
                 .user(UserResponse.of(post.getUser()))
-                .createdAt(DateUtil.toTimeAgoFormat(post.getCreatedAt().toLocalDateTime()))
+                .createdAt(DateUtil.toTimeAgoFormat(post.getCreatedAt()))
                 .isComplete(post.isComplete())
                 .likeCount(post.getLikes().size())
                 .build();
