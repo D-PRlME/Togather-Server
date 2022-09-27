@@ -90,13 +90,15 @@ class AcceptInviteServiceTest {
 
         //given
         User user = User.builder().build();
+        setField(user, "id", 1L);
         Project project = Project.builder().build();
         setField(project, "projectUsers", new ArrayList<>());
 
         given(userFacade.getCurrentUser()).willReturn(user);
-        given(projectInvitationRepository.findById(any())).willReturn(null);
+        given(projectInvitationRepository.findById(any())).willReturn(Optional.empty());
 
         AcceptInviteRequest request = new AcceptInviteRequest();
+        setField(request, "isAccept", false);
 
         //when then
         assertThrows(UserNotInvitedException.class, () -> service.execute(request));
