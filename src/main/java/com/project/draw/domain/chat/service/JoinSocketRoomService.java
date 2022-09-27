@@ -20,7 +20,7 @@ public class JoinSocketRoomService {
 
         User user = userFacade.getCurrentUser(socketIOClient);
 
-        if(request.getIsJoinOneRoom()) {
+        if(request.getIsJoinRoom()) {
             String roomId = request.getRoomId().toString();
             socketRoomFacade.joinOneRoom(socketIOClient, user, roomId);
         } else {

@@ -17,7 +17,7 @@ public enum Tag {
     VUE_JS("Vue.js", "https://wouldyou1214.s3.amazonaws.com/Vue.js.png"),
     SWIFT("Swift", "https://wouldyou1214.s3.amazonaws.com/Swift.png"),
     JAVA("Java", "https://wouldyou1214.s3.amazonaws.com/Java.png"),
-    JAVASCRIPT("JavaScript", "https://wouldyou1214.s3.amazonaws.com/JacaScript.png");
+    JAVASCRIPT("JavaScript", "https://wouldyou1214.s3.amazonaws.com/JavaScript.png");
 
     private final String name;
 
