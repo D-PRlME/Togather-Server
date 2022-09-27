@@ -32,6 +32,10 @@ public class SocketRoomFacade {
 
         roomUserFacade.checkRoomUserExist(room, user);
 
+        socketIOClient
+                .getAllRooms()
+                .forEach(socketIOClient::leaveRoom);
+
         socketIOClient.set(ClientProperty.ROOM_KEY, roomId);
         socketIOClient.joinRoom(roomId);
     }
