@@ -10,8 +10,10 @@ import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.protocol.Packet;
 import com.project.draw.domain.chat.domain.Chat;
 import com.project.draw.domain.chat.domain.Room;
+import com.project.draw.domain.chat.domain.RoomUser;
 import com.project.draw.domain.chat.domain.repository.ChatRepository;
 import com.project.draw.domain.chat.facade.RoomFacade;
+import com.project.draw.domain.chat.facade.RoomUserFacade;
 import com.project.draw.domain.chat.presentation.dto.request.SendChatRequest;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
@@ -38,6 +40,9 @@ class SendChatServiceTest {
     private ChatRepository chatRepository;
 
     @Mock
+    private RoomUserFacade roomUserFacade;
+
+    @Mock
     private UserFacade userFacade;
 
     @Mock
@@ -53,12 +58,16 @@ class SendChatServiceTest {
         SendChatRequest request = new SendChatRequest();
 
         User user = User.builder().build();
+        setField(user, "id", 1L);
         Room room = Room.builder().build();
         setField(room, "id", 1L);
+        RoomUser roomUser = RoomUser.builder().room(room).user(user).build();
 
         Chat chat = Chat.builder().room(room).user(user).build();
 
         given(roomFacade.getCurrentRoom(any())).willReturn(room);
+        given(userFacade.getCurrentUser(any())).willReturn(user);
+        given(roomUserFacade.getById(room.getId(), user.getId())).willReturn(roomUser);
         given(chatRepository.save(any())).willReturn(chat);
 
         //when
