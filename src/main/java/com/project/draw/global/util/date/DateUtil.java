@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class DateUtil {
 
-    public static String createdAtToString(LocalDateTime localDateTime) {
+    public static String toTimeAgoFormat(LocalDateTime localDateTime) {
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -23,28 +23,28 @@ public class DateUtil {
         }
     }
 
-    private static int yearDifference(LocalDateTime now, LocalDateTime localDateTime) {
-        return now.minusYears(localDateTime.getYear()).getYear();
+    private static int yearDifference(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return localDateTime1.minusYears(localDateTime2.getYear()).getYear();
     }
 
-    private static int monthDifference(LocalDateTime now, LocalDateTime localDateTime) {
-        return getIntMonth(now.minusMonths(getIntMonth(localDateTime)));
+    private static int monthDifference(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return getIntMonth(localDateTime1.minusMonths(getIntMonth(localDateTime2)));
     }
 
     private static int getIntMonth(LocalDateTime localDateTime){
         return localDateTime.getMonth().getValue();
     }
 
-    private static int dayDifference(LocalDateTime now, LocalDateTime localDateTime) {
-        return now.minusDays(localDateTime.getDayOfMonth()).getDayOfMonth();
+    private static int dayDifference(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return localDateTime1.minusDays(localDateTime2.getDayOfMonth()).getDayOfMonth();
     }
 
-    private static int hourDifference(LocalDateTime now, LocalDateTime localDateTime) {
-        return now.minusHours(localDateTime.getHour()).getHour();
+    private static int hourDifference(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return localDateTime1.minusHours(localDateTime2.getHour()).getHour();
     }
 
-    private static int minuteDifference(LocalDateTime now, LocalDateTime localDateTime) {
-        return now.minusMinutes(localDateTime.getMinute()).getMinute();
+    private static int minuteDifference(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return localDateTime1.minusMinutes(localDateTime2.getMinute()).getMinute();
     }
 
 }

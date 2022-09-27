@@ -1,6 +1,7 @@
 package com.project.draw.domain.user.domain;
 
 
+import com.project.draw.domain.chat.domain.PrivateRoom;
 import com.project.draw.domain.post.domain.Like;
 import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.user.domain.enums.Authority;
@@ -16,7 +17,17 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -49,12 +60,6 @@ public class User {
     @ColumnDefault("'" + DefaultImage.USER_PROFILE_IMAGE + "'")
     private String profileImageUrl;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Post> post;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Like> likes;
-
     @NotNull
     @BatchSize(size = 50)
     @Enumerated(EnumType.STRING)
@@ -69,13 +74,26 @@ public class User {
     @Enumerated(EnumType.STRING)
     private List<Position> positions;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Post> post;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "user1", cascade = CascadeType.REMOVE)
+    private List<PrivateRoom> privateRooms1;
+
+    @OneToMany(mappedBy = "user2", cascade = CascadeType.REMOVE)
+    private List<PrivateRoom> privateRooms2;
+
     @Builder
-    public User(String email, String name, String password, String profileImageUrl, Authority authority) {
+    public User(String email, String name, String password, String profileImageUrl, Authority authority, String introduce) {
         this.email = email;
         this.name = name;
         this.password = password;
         this.profileImageUrl = profileImageUrl;
         this.authority = authority;
+        this.introduce = introduce;
     }
 
     public void updatePassword(String password) {

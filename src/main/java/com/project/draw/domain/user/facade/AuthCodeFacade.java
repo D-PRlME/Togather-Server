@@ -18,6 +18,7 @@ import java.util.Random;
 public class AuthCodeFacade {
 
     public static final Random RANDOM = new Random();
+
     private final AuthCodeRepository authCodeRepository;
     private final JmsUtil jmsUtil;
     private final JmsProperties jmsProperties;

@@ -1,7 +1,7 @@
 package com.project.draw.domain.project.domain.repository;
 
 import com.project.draw.domain.project.domain.ProjectInvitation;
-import com.project.draw.domain.project.domain.ProjectUserId;
+import com.project.draw.domain.project.domain.ProjectUser.ProjectUserId;
 import com.project.draw.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

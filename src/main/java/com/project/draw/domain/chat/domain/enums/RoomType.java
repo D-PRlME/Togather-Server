@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum RoomType {
 
-    PROJECT,
-    INDIVIDUAL
+    TEAM,
+    PRIVATE
 }

@@ -26,7 +26,7 @@ public class QueryMyRoomListService {
         return new QueryRoomListResponse(
                 roomUserRepository.findByUser(user)
                         .stream()
-                        .map(roomUser -> RoomResponse.of(user, roomUser.getRoom()))
+                        .map(RoomResponse::of)
                         .collect(Collectors.toList())
         );
     }

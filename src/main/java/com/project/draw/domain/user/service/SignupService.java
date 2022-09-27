@@ -41,10 +41,12 @@ public class SignupService {
 
         authCodeFacade.checkIsVerified(email);
 
-        userRepository.save(User.builder()
+        userRepository.save(User
+                .builder()
                 .name(name)
                 .email(email)
                 .password(passwordEncoder.encode(password))
+                .introduce("")
                 .authority(Authority.USER)
                 .build()
         );

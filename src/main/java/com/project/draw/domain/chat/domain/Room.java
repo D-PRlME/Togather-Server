@@ -13,13 +13,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -37,15 +41,21 @@ public class Room {
     private RoomType roomType;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<RoomUser> roomUsers;
+    private List<RoomUser> roomUsers = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "project_id")
+    @OneToOne(mappedBy = "room")
     private Project project;
+
+    @OneToOne(mappedBy = "room")
+    private PrivateRoom privateRoom;
+
+    @Embedded
+    @Column(nullable = false)
+    private LastChat lastChat;
 
     public String getRoomName(User user) {
 
-        if (roomType == RoomType.PROJECT) {
+        if (roomType == RoomType.TEAM) {
             return project.getName();
         } else {
             try{
@@ -58,7 +68,7 @@ public class Room {
 
     public String getRoomImage(User user) {
 
-        if (roomType == RoomType.PROJECT) {
+        if (roomType == RoomType.TEAM) {
             return project.getLogoImage();
         } else {
             try{
@@ -87,8 +97,25 @@ public class Room {
     }
 
     @Builder
-    public Room(RoomType roomType, Project project) {
+    public Room(RoomType roomType, Project project, PrivateRoom privateRoom) {
         this.roomType = roomType;
         this.project = project;
+        this.privateRoom = privateRoom;
+        this.lastChat = new LastChat();
+    }
+
+    public void updateLastMessage(Chat chat) {
+        this.lastChat.lastMessage = chat.getMessage();
+        this.lastChat.lastSentAt = chat.getCreatedAt();
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @Embeddable
+    public static class LastChat {
+        private String lastMessage = "";
+        private ZonedDateTime lastSentAt = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 }
