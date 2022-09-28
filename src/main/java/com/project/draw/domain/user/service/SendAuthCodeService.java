@@ -6,6 +6,7 @@ import com.project.draw.domain.user.facade.UserFacade;
 import com.project.draw.domain.user.presentation.dto.request.SendAuthCodeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ public class SendAuthCodeService {
     private final AuthCodeFacade authCodeFacade;
     private final UserFacade userFacade;
 
+    @Transactional
     public void execute(@Valid SendAuthCodeRequest request) {
 
         String email = request.getEmail();

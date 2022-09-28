@@ -10,6 +10,7 @@ import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class QueryPostsInfoService {
     private final LikeRepository likeRepository;
     private final UserFacade userFacade;
 
+    @Transactional(readOnly = true)
     public PostInfoResponse execute(Long id) {
 
         User user = userFacade.getCurrentUser();
