@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.draw.domain.chat.domain.Chat;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.presentation.dto.response.UserResponse;
+import com.project.draw.global.util.date.DateUtil;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -17,7 +16,7 @@ public class ChatResponse {
     private Long roomId;
     private UserResponse user;
     @JsonProperty("sent_at")
-    private LocalDateTime sentAt;
+    private String sentAt;
     private String message;
 
     public static ChatResponse of(Chat chat) {
@@ -29,7 +28,8 @@ public class ChatResponse {
                 .roomId(chat.getRoom().getId())
                 .user(UserResponse.of(user))
                 .message(chat.getMessage())
-                .sentAt(chat.getCreatedAt().toLocalDateTime())
+                .sentAt(chat.getCreatedAt()
+                        .format(DateUtil.getMeridiemFormatter()))
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package com.project.draw.domain.chat.domain;
 
 import com.project.draw.domain.user.domain.User;
+import com.project.draw.global.util.date.DateUtil;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +19,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -39,7 +39,7 @@ public class RoomUser {
     private User user;
 
     @Column(nullable = false)
-    private ZonedDateTime lastRead = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+    private LocalDateTime lastRead = DateUtil.getZonedNow();
 
     @Builder
     public RoomUser(Room room, User user) {
@@ -48,7 +48,7 @@ public class RoomUser {
     }
 
     public void updateLastReadTime() {
-        this.lastRead = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+        this.lastRead = DateUtil.getZonedNow();
     }
 
     @Getter

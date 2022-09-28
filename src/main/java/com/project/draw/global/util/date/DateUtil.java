@@ -1,6 +1,9 @@
 package com.project.draw.global.util.date;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class DateUtil {
 
@@ -47,4 +50,11 @@ public class DateUtil {
         return localDateTime1.minusMinutes(localDateTime2.getMinute()).getMinute();
     }
 
+    public static LocalDateTime getZonedNow() {
+        return LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+    }
+
+    public static DateTimeFormatter getMeridiemFormatter() {
+        return DateTimeFormatter.ofPattern("a HH:mm").withLocale(Locale.forLanguageTag("ko"));
+    }
 }

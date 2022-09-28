@@ -34,7 +34,7 @@ public class RoomResponse {
                 .lastChat(LastChat
                         .builder()
                         .lastMessage(room.getLastChat().getLastMessage())
-                        .lastSentAt(DateUtil.toTimeAgoFormat(room.getLastChat().getLastSentAt().toLocalDateTime()))
+                        .lastSentAt(DateUtil.toTimeAgoFormat(room.getLastChat().getLastSentAt()))
                         .build()
                 )
                 .build();
