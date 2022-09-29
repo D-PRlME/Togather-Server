@@ -8,6 +8,7 @@ import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -16,6 +17,7 @@ public class AddLikeService {
     private final PostFacade postFacade;
     private final LikeRepository likeRepository;
 
+    @Transactional
     public void execute(Long id) {
         Post post = postFacade.getPostById(id);
         User user = userFacade.getCurrentUser();
