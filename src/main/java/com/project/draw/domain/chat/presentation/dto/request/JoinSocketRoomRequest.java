@@ -10,9 +10,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class JoinSocketRoomRequest {
 
-    @JsonProperty("is_join_one_room")
-    @NotNull(message = "is_join_one_room은 null이어선 안됩니다")
-    private Boolean isJoinOneRoom;
+    @JsonProperty("is_join_room")
+    @NotNull(message = "is_join_room은 null이어선 안됩니다")
+    private Boolean isJoinRoom;
 
     @JsonProperty("room_id")
     @NotNull(message = "room_id는 null이어선 안됩니다")

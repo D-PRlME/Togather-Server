@@ -43,7 +43,7 @@ public class ChatController {
         return queryChatListService.execute(roomId, pageable);
     }
 
-    @GetMapping("")
+    @GetMapping("/room")
     public QueryRoomListResponse queryMyRoomList() {
         return queryMyRoomListService.execute();
     }

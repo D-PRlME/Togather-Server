@@ -28,7 +28,7 @@ public class SocketConnectListener {
 
         User user = userFacade.getUserByEmail(email);
 
-        socketIOClient.set(ClientProperty.USER_KEY, user.getEmail());
+        socketIOClient.set(ClientProperty.USER_KEY, user.getId());
 
         socketRoomFacade.joinAllRoom(socketIOClient, user);
 
