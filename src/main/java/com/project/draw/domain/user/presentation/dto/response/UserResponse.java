@@ -2,11 +2,13 @@ package com.project.draw.domain.user.presentation.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.draw.domain.user.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@AllArgsConstructor
 public class UserResponse {
 
     @JsonProperty("user_id")
