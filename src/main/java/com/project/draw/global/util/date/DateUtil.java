@@ -14,7 +14,7 @@ public class DateUtil {
         if (localDateTime.getYear() != now.getYear()) {
             return yearDifference(now, localDateTime) + "년전";
         } else if (getIntMonth(localDateTime) != getIntMonth(now)) {
-            return monthDifference(now, localDateTime) + "월전";
+            return monthDifference(now, localDateTime) + "달전";
         } else if (localDateTime.getDayOfMonth() != now.getDayOfMonth()) {
             return dayDifference(now, localDateTime) + "일전";
         } else if (localDateTime.getHour() != now.getHour()) {
@@ -54,7 +54,9 @@ public class DateUtil {
         return LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
-    public static DateTimeFormatter getMeridiemFormatter() {
-        return DateTimeFormatter.ofPattern("a HH:mm").withLocale(Locale.forLanguageTag("ko"));
+    public static String meridiemFormat(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter
+                                .ofPattern("a HH:mm")
+                                .withLocale(Locale.forLanguageTag("ko")));
     }
 }
