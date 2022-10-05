@@ -2,6 +2,7 @@ package com.project.draw.domain.post.service;
 
 import com.project.draw.domain.post.domain.LikeUserId;
 import com.project.draw.domain.post.domain.Post;
+import com.project.draw.domain.post.domain.repository.LikeRepository;
 import com.project.draw.domain.post.facade.PostFacade;
 import com.project.draw.domain.post.presentation.dto.response.PostInfoResponse;
 import com.project.draw.domain.user.domain.User;
@@ -16,6 +17,7 @@ public class QueryPostInfoService {
 
     private final PostFacade postFacade;
     private final UserFacade userFacade;
+    private final LikeRepository likeRepository;
 
     @Transactional(readOnly = true)
     public PostInfoResponse execute(Long id) {
@@ -24,11 +26,12 @@ public class QueryPostInfoService {
         Post post = postFacade.getPostById(id);
 
 
-        boolean isLiked = post.getLikes().contains(LikeUserId
+        boolean isLiked = likeRepository.findById(LikeUserId
                 .builder()
                 .post(post.getId())
                 .user(user.getId())
-                .build());
+                .build())
+                .isPresent();
 
         return PostInfoResponse.of(user, post, isLiked);
     }

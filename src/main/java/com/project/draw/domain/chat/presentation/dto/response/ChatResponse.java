@@ -5,11 +5,13 @@ import com.project.draw.domain.chat.domain.Chat;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.presentation.dto.response.UserResponse;
 import com.project.draw.global.util.date.DateUtil;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@AllArgsConstructor
 public class ChatResponse {
 
     @JsonProperty("room_id")
@@ -28,8 +30,7 @@ public class ChatResponse {
                 .roomId(chat.getRoom().getId())
                 .user(UserResponse.of(user))
                 .message(chat.getMessage())
-                .sentAt(chat.getCreatedAt()
-                        .format(DateUtil.getMeridiemFormatter()))
+                .sentAt(DateUtil.meridiemFormat(chat.getCreatedAt()))
                 .build();
     }
 }
