@@ -9,5 +9,5 @@ import java.util.List;
 @Getter
 public class ImagesUrlResponse {
 
-    List<String> ImagesUrl;
+    List<String> imagesUrl;
 }

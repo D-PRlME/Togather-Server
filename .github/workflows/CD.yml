@@ -1,11 +1,6 @@
-name: Docker Image CD
+name: Publish Docker
+on: [push]
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,15 +28,3 @@ jobs:
 
       - name: Push on Dockerhub
         run: docker push ${{secrets.DOCKER_REPOSITORY}}
-
-  deploy:
-    needs: build
-    name: Deploy
-    runs-on: [ self-hosted, label-development ]
-    steps:
-      - name: Docker run
-        run: |
-          sudo docker stop $(docker ps -a -q  --filter ancestor=${{secrets.DOCKER_REPOSITORY}})
-          sudo docker pull ${{secrets.DOCKER_REPOSITORY}})
-          sudo nohup docker run --env-file ./my_env -p 8080:8080 -p 8081:8081 ${{secrets.DOCKER_REPOSITORY}} &
-      

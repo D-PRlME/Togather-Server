@@ -4,7 +4,9 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.project.draw.domain.chat.exception.RoomNotFoundException;
 import com.project.draw.domain.post.exception.InvalidUserException;
 import com.project.draw.global.socket.security.ClientProperty;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class SocketUtil {
 
     public static Long getUserId(SocketIOClient socketIOClient){
