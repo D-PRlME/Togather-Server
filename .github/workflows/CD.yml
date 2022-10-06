@@ -1,10 +1,5 @@
-name: Docker Image CD
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+name: Publish Docker
+on: [push]
 
 jobs:
   build:
