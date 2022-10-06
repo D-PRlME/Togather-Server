@@ -10,7 +10,7 @@ public class GoogleCodeRequest {
     private final String clientId;
     private final String clientSecret;
     private final String redirectUri;
-    private final String grantType = "authorization_code";
+    private final String grantType;
 
     @Builder
     public GoogleCodeRequest(String code, String clientId, String clientSecret, String redirectUri) {
@@ -18,6 +18,7 @@ public class GoogleCodeRequest {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.redirectUri = redirectUri;
+        this.grantType = "authorization_code";
     }
 
 }
