@@ -12,7 +12,7 @@ spring:
       format_sql: true
       generate-ddl: false
     defer-datasource-initialization: true
-    show-sql: true
+    show-sql: false
   jackson:
     property-naming-strategy: SNAKE_CASE
 
@@ -32,7 +32,6 @@ spring:
             required: true
 
     auth-exp: ${AUTH_CODE_EXP}
-    suffix: '${MAIL_SUFFIX}'
 
 cloud:
   aws:
