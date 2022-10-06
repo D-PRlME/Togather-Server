@@ -106,7 +106,7 @@ public class User {
 
     public void updateInfo(UpdateUserInfoRequest request) {
         this.profileImageUrl = request.getProfileImageUrl();
-        this.name = request.getUserName();
+        this.name = request.getName();
         this.introduce = request.getIntroduce();
         this.positions = request.getPositions();
     }
