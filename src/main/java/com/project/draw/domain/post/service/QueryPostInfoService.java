@@ -25,7 +25,6 @@ public class QueryPostInfoService {
         User user = userFacade.getCurrentUser();
         Post post = postFacade.getPostById(id);
 
-
         boolean isLiked = likeRepository.findById(LikeUserId
                 .builder()
                 .post(post.getId())
