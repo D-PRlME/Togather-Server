@@ -17,7 +17,7 @@ public class UpdateUserInfoRequest {
 
     private String profileImageUrl;
 
-    @Size(max = 1000)
+    @Size(max = 300)
     private String introduce;
 
     private List<Position> positions;
