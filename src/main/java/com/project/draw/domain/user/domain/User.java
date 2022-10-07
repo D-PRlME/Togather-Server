@@ -30,7 +30,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
@@ -47,30 +46,28 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(max = 40)
-    @Column(unique = true)
+    @Column(length = 40, unique = true)
     private String email;
 
     @NotNull
-    @Size(max = 30)
+    @Column(length = 30, nullable = false)
     private String name;
 
-    @Size(max = 60)
+    @Column(length = 60, nullable = false)
     private String password;
 
     @ColumnDefault("'" + DefaultImage.USER_PROFILE_IMAGE + "'")
+    @Column(length = 200, nullable = false)
     private String profileImageUrl;
 
-    @NotNull
-    @BatchSize(size = 50)
     @Enumerated(EnumType.STRING)
-    @Column(length = 7)
+    @Column(length = 7, nullable = false)
     private Authority authority;
 
-    @Column(length = 1000, nullable = false)
+    @ColumnDefault("'ㅤ'")
+    @Column(length = 300, nullable = false)
     private String introduce;
 
-    @BatchSize(size = 50)
     @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
     private List<Position> positions;
@@ -105,9 +102,9 @@ public class User {
     }
 
     public void updateInfo(UpdateUserInfoRequest request) {
-        this.profileImageUrl = request.getProfileImageUrl();
+        this.profileImageUrl = request.getProfileImageUrl() == null ? DefaultImage.USER_PROFILE_IMAGE : request.getProfileImageUrl();
         this.name = request.getName();
-        this.introduce = request.getIntroduce();
+        this.introduce = request.getIntroduce() == null ? "ㅤ" : request.getIntroduce();
         this.positions = request.getPositions();
     }
 
