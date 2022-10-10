@@ -4,6 +4,7 @@ import com.project.draw.domain.user.exception.UserAlreadyExistException;
 import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.domain.user.facade.UserFacade;
 import com.project.draw.domain.user.presentation.dto.request.SendAuthCodeRequest;
+import com.project.draw.global.util.jms.MailType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,6 @@ public class SendSignupAuthCodeService {
             throw UserAlreadyExistException.EXCEPTION;
         }
 
-        authCodeFacade.sendMail(email);
+        authCodeFacade.sendMail(MailType.SIGN_UP, email);
     }
 }

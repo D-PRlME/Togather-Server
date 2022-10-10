@@ -4,6 +4,7 @@ import com.project.draw.domain.user.exception.UserNotFoundException;
 import com.project.draw.domain.user.facade.AuthCodeFacade;
 import com.project.draw.domain.user.facade.UserFacade;
 import com.project.draw.domain.user.presentation.dto.request.SendAuthCodeRequest;
+import com.project.draw.global.util.jms.MailType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,6 @@ public class SendAuthCodeService {
             throw UserNotFoundException.EXCEPTION;
         }
 
-        authCodeFacade.sendMail(email);
+        authCodeFacade.sendMail(MailType.FIND_PASSWORD, email);
     }
 }

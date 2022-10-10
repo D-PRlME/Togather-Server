@@ -17,7 +17,7 @@ public class JmsUtil {
     private final JmsProperties jmsProperties;
     private final JavaMailSender mailSender;
 
-    public void sendMail(String email, String authenticationCode) {
+    public void sendMail(MailType mailType, String email, String authenticationCode) {
 
         try {
             MimeMessage message = mailSender.createMimeMessage();
@@ -27,7 +27,7 @@ public class JmsUtil {
             messageHelper.setFrom(jmsProperties.getUsername());
             messageHelper.setSubject("[Togather] 이메일 인증");
 
-            String text = getFormattedString(authenticationCode.split(""));
+            String text = getFormattedString(mailType, authenticationCode.split(""));
             boolean isHTML = true;
 
             messageHelper.setText(text,isHTML);
@@ -39,8 +39,8 @@ public class JmsUtil {
 
     }
 
-    private String getFormattedString(String[] codes) {
-        return String.format(getMailTemplate(),
+    private String getFormattedString(MailType mailType, String[] codes) {
+        return String.format(getMailTemplate(mailType),
                 codes[0],
                 codes[1],
                 codes[2],
@@ -49,9 +49,9 @@ public class JmsUtil {
                 codes[5]);
     }
 
-    private String getMailTemplate(){
+    private String getMailTemplate(MailType mailType){
         try {
-            byte[] bytes = new ClassPathResource("static/email_template.html").getInputStream().readAllBytes();
+            byte[] bytes = new ClassPathResource("static/"+mailType.getFileName()).getInputStream().readAllBytes();
             return new String(bytes);
         } catch (IOException e) {
             throw MailSendException.EXCEPTION;
