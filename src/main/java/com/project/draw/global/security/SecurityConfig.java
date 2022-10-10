@@ -55,7 +55,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT, "/users/auth").permitAll()
 
                 .antMatchers(HttpMethod.GET, "/posts").permitAll()
-                .antMatchers(HttpMethod.GET, "/tag/list").permitAll()
+                .antMatchers(HttpMethod.GET, "/posts/tag/list").permitAll()
 
                 .anyRequest().authenticated()
 
