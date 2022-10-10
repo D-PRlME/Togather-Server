@@ -8,6 +8,7 @@ import com.project.draw.domain.user.exception.UnverifiedEmailException;
 import com.project.draw.global.util.RegexpProperty;
 import com.project.draw.global.util.jms.JmsProperties;
 import com.project.draw.global.util.jms.JmsUtil;
+import com.project.draw.global.util.jms.MailType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -45,13 +46,13 @@ public class AuthCodeFacade {
         }
     }
 
-    public void sendMail(String email) {
+    public void sendMail(MailType mailType, String email) {
 
         String code = createRandomCode();
         AuthCode authCode = getAuthCode(email, code);
         authCodeRepository.save(authCode);
 
-        jmsUtil.sendMail(email, authCode.getCode());
+        jmsUtil.sendMail(mailType, email, authCode.getCode());
     }
 
     private AuthCode getAuthCode(String email, String code) {
