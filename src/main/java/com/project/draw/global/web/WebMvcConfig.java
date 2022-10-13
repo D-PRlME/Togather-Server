@@ -13,6 +13,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addMapping("/**")
                 .allowedOrigins("*")
                 .allowedMethods("*")
+                .allowCredentials(true)
                 .allowedHeaders("*");
     }
 }
