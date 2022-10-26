@@ -24,9 +24,6 @@ public class UpdatePostRequest {
     @NotNull(message = "tags는 null일 수 없습니다")
     private List<Tag> tags;
 
-    @NotBlank(message = "link는 null, 공백을 포함할 수 없습니다")
-    private String link;
-
     @NotNull(message = "is_complite는 null일 수 없습니다")
     private boolean isComplete;
 }

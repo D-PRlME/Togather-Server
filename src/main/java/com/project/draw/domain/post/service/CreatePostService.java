@@ -45,7 +45,6 @@ public class CreatePostService {
                         .title(request.getTitle())
                         .content(request.getContent())
                         .tags(tags)
-                        .link(request.getLink())
                         .user(user)
                         .build()
         );
