@@ -19,7 +19,6 @@ public class PostInfoResponse {
     private final String createdAt;
     private final List<Tag> tags;
     private final String content;
-    private final String link;
     private final Boolean isComplete;
     private final Integer likeCount;
     private final Boolean isLiked;
@@ -34,7 +33,6 @@ public class PostInfoResponse {
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .tags(post.getTags())
                 .content(post.getContent())
-                .link(post.getLink())
                 .isComplete(post.isComplete())
                 .likeCount(post.getLikes().size())
                 .isLiked(isLiked)
