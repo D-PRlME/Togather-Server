@@ -19,6 +19,6 @@ public class UpdatePostService {
 
         postFacade.checkUser(post);
 
-        post.updatePost(request.getTitle(), request.getContent(), request.getTags(), request.isComplete());
+        post.updatePost(request.getTitle(), request.getContent(), request.getTags(), request.getLink(), request.isComplete());
     }
 }

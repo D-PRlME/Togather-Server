@@ -16,6 +16,9 @@ public class CreatePostRequest {
     @Size(min = 1, max = 30, message = "제목은 최소 1자 ~ 최대 30자 내외입니다.")
     private String title;
 
+    @NotBlank(message = "link는 null, 공백을 포함할 수 없습니다")
+    private String link;
+
     @NotNull(message = "content는 null일 수 없습니다")
     @Size(min = 1, max = 1000, message = "내용은 최소 1자 ~ 최대 1000자 내외입니다.")
     private String content;

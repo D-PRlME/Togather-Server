@@ -46,6 +46,9 @@ public class Post extends BaseTimeEntity {
     private List<Tag> tags = new ArrayList<>();
 
     @Column(nullable = false)
+    private String link;
+
+    @Column(nullable = false)
     private boolean isComplete = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -56,17 +59,19 @@ public class Post extends BaseTimeEntity {
     private List<Like> likes;
 
     @Builder
-    public Post(String title, String content, List<Tag> tags, User user) {
+    public Post(String title, String content, List<Tag> tags, String link, User user) {
         this.title = title;
         this.content = content;
         this.tags = tags;
+        this.link = link;
         this.user = user;
     }
 
-    public void updatePost(String title, String content, List<Tag> tags, boolean isComplete) {
+    public void updatePost(String title, String content, List<Tag> tags, String link, boolean isComplete) {
         this.title = title;
         this.content = content;
         this.tags = tags;
+        this.link = link;
         this.isComplete = isComplete;
     }
 }
