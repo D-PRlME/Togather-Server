@@ -14,9 +14,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: build docker image
-        run: docker build -t rolls .
-
       - name: Login to Dockerhub
         uses: docker/login-action@v1
         with:
