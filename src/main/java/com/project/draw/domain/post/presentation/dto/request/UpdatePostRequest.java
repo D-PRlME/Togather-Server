@@ -26,3 +26,4 @@ public class UpdatePostRequest {
     @NotNull(message = "is_complite는 null일 수 없습니다")
     private boolean isComplete;
 }
+//

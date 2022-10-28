@@ -34,4 +34,4 @@ public class QueryPostInfoService {
 
         return PostInfoResponse.of(user, post, isLiked);
     }
-}
+}//

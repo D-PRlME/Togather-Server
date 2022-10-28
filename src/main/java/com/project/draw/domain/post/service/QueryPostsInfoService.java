@@ -37,3 +37,4 @@ public class QueryPostsInfoService {
         return PostInfoResponse.of(user, post, optionalLike.isPresent());
     }
 }
+//
