@@ -22,4 +22,3 @@ public class CreatePostRequest {
     @NotNull(message = "tags는 null일 수 없습니다")
     private List<String> tags;
 }
-//
