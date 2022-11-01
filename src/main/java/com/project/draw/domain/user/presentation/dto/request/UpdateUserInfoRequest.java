@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UpdateUserInfoRequest {
 
-    @NotBlank(message = "username은 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
+    @NotBlank(message = "name은 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
     private String name;
 
     private String profileImageUrl;
