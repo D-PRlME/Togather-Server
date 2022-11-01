@@ -20,6 +20,7 @@ public class QueryUserInfoService {
 
         return QueryUserInfoResponse
                 .builder()
+                .userId(user.getId())
                 .name(user.getName())
                 .profileImageUrl(user.getProfileImageUrl())
                 .email(user.getEmail())

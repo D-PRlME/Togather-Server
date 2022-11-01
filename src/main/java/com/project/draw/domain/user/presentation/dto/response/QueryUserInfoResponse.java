@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class QueryUserInfoResponse {
 
+    private final Long userId;
     private final String name;
     private final String email;
     private final String profileImageUrl;
