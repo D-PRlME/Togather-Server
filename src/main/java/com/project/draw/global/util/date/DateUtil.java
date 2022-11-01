@@ -12,7 +12,7 @@ public class DateUtil {
 
     public static String toTimeAgoFormat(LocalDateTime localDateTime) {
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = getZonedNow();
 
         if (localDateTime.getYear() != now.getYear()) {
             return yearDifference(now, localDateTime) + "년전";
