@@ -1,5 +1,6 @@
 package com.project.draw.domain.post.service;
 
+import com.project.draw.domain.post.domain.Like;
 import com.project.draw.domain.post.domain.LikeUserId;
 import com.project.draw.domain.post.domain.Post;
 import com.project.draw.domain.post.domain.repository.LikeRepository;
@@ -9,6 +10,8 @@ import com.project.draw.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,9 +25,13 @@ public class DeleteLikeService {
         User user = userFacade.getCurrentUser();
         Post post = postFacade.getPostById(id);
 
-        likeRepository.deleteById(LikeUserId.builder()
+        Optional<Like> optionalLike = likeRepository.findById(LikeUserId
+                .builder()
                 .user(user.getId())
                 .post(post.getId())
-                .build());
+                .build()
+        );
+
+        optionalLike.ifPresent(likeRepository::delete);
     }
 }
