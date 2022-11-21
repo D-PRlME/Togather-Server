@@ -20,7 +20,7 @@ public class FindPasswordService {
     @Transactional
     public void execute(FindPasswordRequest request) {
 
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getUserByEmail(request.getEmail());
 
         authCodeFacade.checkIsVerified(user.getEmail());
 
