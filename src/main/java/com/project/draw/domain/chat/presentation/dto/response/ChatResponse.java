@@ -16,18 +16,25 @@ public class ChatResponse {
 
     @JsonProperty("room_id")
     private Long roomId;
-    private UserResponse user;
+
+    @JsonProperty("is_mine")
+    private Boolean isMine;
+
     @JsonProperty("sent_at")
     private String sentAt;
+
+    private UserResponse user;
+
     private String message;
 
-    public static ChatResponse of(Chat chat) {
+    public static ChatResponse of(Chat chat, Boolean isMine) {
 
         User user = chat.getUser();
 
         return ChatResponse
                 .builder()
                 .roomId(chat.getRoom().getId())
+                .isMine(isMine)
                 .user(UserResponse.of(user))
                 .message(chat.getMessage())
                 .sentAt(DateUtil.meridiemFormat(chat.getCreatedAt()))
