@@ -49,7 +49,7 @@ public class SendChatService {
                 .getRoomOperations(room.getId().toString())
                 .getClients()
                 .forEach(client -> {
-                    client.sendEvent(SocketProperty.CHAT, ChatResponse.of(chat));
+                    client.sendEvent(SocketProperty.CHAT, ChatResponse.of(chat, client == socketIOClient));
                     RoomUser clientRoomUser = roomUserFacade
                             .getById(room.getId(), SocketUtil.getUserId(client));
                     clientRoomUser.updateLastReadTime();
