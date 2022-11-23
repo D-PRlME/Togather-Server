@@ -32,7 +32,7 @@ public class QueryChatListService {
 
         return new QueryChatListResponse(
                 pageable.getPageNumber(),
-                chatRepository.findByRoomId(roomId, pageable)
+                chatRepository.findByRoomIdOrderByIdDesc(roomId, pageable)
                         .stream()
                         .map(c -> ChatResponse.of(c, c.getUser() == user))
                         .collect(Collectors.toList())
