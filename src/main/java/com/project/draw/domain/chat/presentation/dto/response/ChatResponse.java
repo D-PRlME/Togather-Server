@@ -23,8 +23,10 @@ public class ChatResponse {
     @JsonProperty("sent_at")
     private String sentAt;
 
+    @JsonProperty("user")
     private UserResponse user;
 
+    @JsonProperty("message")
     private String message;
 
     public static ChatResponse of(Chat chat, Boolean isMine) {
