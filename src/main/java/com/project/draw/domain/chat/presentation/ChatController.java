@@ -39,7 +39,7 @@ public class ChatController {
 
     @GetMapping("/{room-id}")
     public QueryChatListResponse queryChatList(@PathVariable("room-id") Long roomId,
-                                               @PageableDefault(size=50, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                               @PageableDefault(size=100, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
         return queryChatListService.execute(roomId, pageable);
     }
 
