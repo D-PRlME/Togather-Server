@@ -52,7 +52,7 @@ class QueryChatListServiceTest {
 
         given(userFacade.getCurrentUser()).willReturn(user);
         given(roomUserFacade.getById(any(), any())).willReturn(roomUser);
-        given(chatRepository.findByRoomId(roomId, pageable)).willReturn(arrayList);
+        given(chatRepository.findByRoomIdOrderByIdDesc(roomId, pageable)).willReturn(arrayList);
 
         //when
         QueryChatListResponse response = service.execute(roomId, pageable);
