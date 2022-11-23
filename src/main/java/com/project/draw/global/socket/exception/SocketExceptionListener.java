@@ -8,6 +8,7 @@ import com.project.draw.global.error.exception.ErrorCode;
 import com.project.draw.global.socket.SocketProperty;
 import io.netty.channel.ChannelHandlerContext;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SocketExceptionListener implements ExceptionListener {
@@ -39,7 +40,14 @@ public class SocketExceptionListener implements ExceptionListener {
 
     private void runExceptionHandling(Exception e, SocketIOClient client) {
 
-        final ErrorCode errorCode;
+        ErrorCode errorCode;
+
+        System.out.println(e.getCause());
+        System.out.println(e.getMessage());
+        System.out.println(e.getClass());
+
+        System.out.println(e.getCause().getMessage());
+        Arrays.stream(e.getCause().getStackTrace()).forEach(System.out::println);
 
         if (e.getCause() instanceof BusinessException) {
             errorCode = ((BusinessException) e.getCause()).getErrorCode();
