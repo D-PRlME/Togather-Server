@@ -2,6 +2,8 @@ package com.project.draw.domain.chat.service;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.draw.domain.chat.domain.Chat;
 import com.project.draw.domain.chat.domain.Room;
 import com.project.draw.domain.chat.domain.RoomUser;
@@ -9,6 +11,7 @@ import com.project.draw.domain.chat.domain.repository.ChatRepository;
 import com.project.draw.domain.chat.facade.RoomFacade;
 import com.project.draw.domain.chat.facade.RoomUserFacade;
 import com.project.draw.domain.chat.presentation.dto.request.SendChatRequest;
+import com.project.draw.domain.chat.presentation.dto.response.ChatResponse;
 import com.project.draw.domain.user.domain.User;
 import com.project.draw.domain.user.facade.UserFacade;
 import com.project.draw.domain.user.presentation.dto.response.UserResponse;
@@ -16,6 +19,7 @@ import com.project.draw.global.socket.SocketProperty;
 import com.project.draw.global.socket.util.SocketUtil;
 import com.project.draw.global.util.date.DateUtil;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +30,7 @@ import java.util.Map;
 @Service
 public class SendChatServiceV2 {
 
+
     private final ChatRepository chatRepository;
     private final UserFacade userFacade;
     private final RoomUserFacade roomUserFacade;
@@ -33,6 +38,8 @@ public class SendChatServiceV2 {
 
     @Transactional
     public void execute(SocketIOServer socketIOServer, SocketIOClient socketIOClient, SendChatRequest request) {
+
+        System.out.println("SendChatServiceV2.execute");
 
         User user = userFacade.getCurrentUser(socketIOClient);
         Room room = roomFacade.getCurrentRoom(socketIOClient);
@@ -49,11 +56,18 @@ public class SendChatServiceV2 {
         room.updateLastMessage(chat);
         roomUser.updateLastReadTime();
 
+        ObjectMapper mapper = new ObjectMapper();
+
         socketIOServer
                 .getRoomOperations(room.getId().toString())
                 .getClients()
                 .forEach(client -> {
-                    client.sendEvent(SocketProperty.CHAT, getChatMap(chat, user));
+                    try {
+                        client.sendEvent(SocketProperty.CHAT,
+                                mapper.writeValueAsString(ChatResponse.of(chat, client == socketIOClient)));
+                    } catch (JsonProcessingException e) {
+                        System.out.println("jsonProcessingException");
+                    }
                     RoomUser clientRoomUser = roomUserFacade
                             .getById(room.getId(), SocketUtil.getUserId(client));
                     clientRoomUser.updateLastReadTime();
@@ -61,15 +75,4 @@ public class SendChatServiceV2 {
 
     }
 
-    private Map<String, Object> getChatMap(Chat chat, User user) {
-        Map<String, Object> map = new HashMap<>();
-
-        map.put("room_id", chat.getRoom().getId());
-        map.put("is_mine", chat.getUser() == user);
-        map.put("user", UserResponse.of(user));
-        map.put("message", chat.getMessage());
-        map.put("sent_at", DateUtil.meridiemFormat(chat.getCreatedAt()));
-
-        return map;
-    }
 }
