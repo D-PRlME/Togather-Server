@@ -64,7 +64,7 @@ public class SendChatServiceV2 {
     private Map<String, Object> getChatMap(Chat chat, User user) {
         Map<String, Object> map = new HashMap<>();
 
-        map.put("room_id", chat.getRoom().getLastChat());
+        map.put("room_id", chat.getRoom().getId());
         map.put("is_mine", chat.getUser() == user);
         map.put("user", UserResponse.of(user));
         map.put("message", chat.getMessage());
