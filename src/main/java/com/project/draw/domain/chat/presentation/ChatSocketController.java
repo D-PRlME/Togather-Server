@@ -8,6 +8,7 @@ import com.project.draw.domain.chat.presentation.dto.request.JoinSocketRoomReque
 import com.project.draw.domain.chat.presentation.dto.request.SendChatRequest;
 import com.project.draw.domain.chat.service.JoinSocketRoomService;
 import com.project.draw.domain.chat.service.SendChatService;
+import com.project.draw.domain.chat.service.SendChatServiceV2;
 import com.project.draw.global.socket.SocketProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,13 @@ public class ChatSocketController {
     @OnEvent(SocketProperty.JOIN)
     public void enterRoom(SocketIOClient socketIOClient, @RequestBody @Valid JoinSocketRoomRequest request){
         joinSocketRoomService.execute(socketIOClient, request);
+    }
+
+    private final SendChatServiceV2 sendChatServiceV2;
+
+    @OnEvent(SocketProperty.CHAT + "2")
+    public void sendChatV2(SocketIOClient socketIOClient, @RequestBody @Valid SendChatRequest request){
+        sendChatServiceV2.execute(socketIOServer, socketIOClient, request);
     }
 
 }
