@@ -1,6 +1,7 @@
 package com.project.draw.domain.chat.service;
 
 import com.project.draw.domain.chat.domain.Chat;
+import com.project.draw.domain.chat.domain.Room;
 import com.project.draw.domain.chat.domain.RoomUser;
 import com.project.draw.domain.chat.domain.repository.ChatRepository;
 import com.project.draw.domain.chat.facade.RoomUserFacade;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,24 +43,20 @@ class QueryChatListServiceTest {
     public void 채팅_리스트_조회_성공() {
         //given
         Long roomId = 1L;
-        int page = 5;
-
-        Pageable pageable = Pageable.ofSize(1).withPage(page);
         List<Chat> arrayList = Collections.emptyList();
 
         User user = User.builder().build();
         setField(user, "id", 1L);
-        RoomUser roomUser = RoomUser.builder().user(user).build();
+        Room room = Room.builder().build();
+        RoomUser roomUser = RoomUser.builder().user(user).room(room).build();
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 31, 00, 00 ,00);
 
         given(userFacade.getCurrentUser()).willReturn(user);
         given(roomUserFacade.getById(any(), any())).willReturn(roomUser);
-        given(chatRepository.findByRoomIdOrderByIdAsc(roomId, pageable)).willReturn(arrayList);
+        given(chatRepository.findTop100ByRoomAndCreatedAtBeforeOrderByIdAsc(room, localDateTime)).willReturn(arrayList);
 
         //when
-        QueryChatListResponse response = service.execute(roomId, pageable);
-
-        //then
-        assertThat(response.getPage()).isEqualTo(page);
+        QueryChatListResponse response = service.execute(roomId, localDateTime);
     }
 
 }

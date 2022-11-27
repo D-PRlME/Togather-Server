@@ -12,15 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RequestMapping("/chats")
@@ -39,8 +34,8 @@ public class ChatController {
 
     @GetMapping("/{room-id}")
     public QueryChatListResponse queryChatList(@PathVariable("room-id") Long roomId,
-                                               @PageableDefault(size=100, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
-        return queryChatListService.execute(roomId, pageable);
+                                               @RequestParam("time") LocalDateTime localDateTime) {
+        return queryChatListService.execute(roomId, localDateTime);
     }
 
     @GetMapping("/room")

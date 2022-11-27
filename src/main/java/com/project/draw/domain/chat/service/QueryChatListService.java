@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class QueryChatListService {
     private final UserFacade userFacade;
 
     @Transactional
-    public QueryChatListResponse execute(Long roomId, Pageable pageable) {
+    public QueryChatListResponse execute(Long roomId, LocalDateTime localDateTime) {
 
         User user = userFacade.getCurrentUser();
         RoomUser roomUser = roomUserFacade.getById(roomId, user.getId());
@@ -31,8 +32,7 @@ public class QueryChatListService {
         roomUser.updateLastReadTime();
 
         return new QueryChatListResponse(
-                pageable.getPageNumber(),
-                chatRepository.findByRoomIdOrderByIdAsc(roomId, pageable)
+                chatRepository.findTop100ByRoomAndCreatedAtBeforeOrderByIdAsc(roomUser.getRoom(), localDateTime)
                         .stream()
                         .map(c -> ChatResponse.of(c, c.getUser() == user))
                         .collect(Collectors.toList())

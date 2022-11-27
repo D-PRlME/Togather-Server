@@ -11,8 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class QueryChatListResponse {
 
-    private Integer page;
-
     private List<ChatResponse> chatList;
 
 }
