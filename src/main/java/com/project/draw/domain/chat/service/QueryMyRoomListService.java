@@ -9,7 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparing;
 
 @RequiredArgsConstructor
 @Service
@@ -27,6 +30,7 @@ public class QueryMyRoomListService {
                 roomUserRepository.findByUser(user)
                         .stream()
                         .map(RoomResponse::of)
+                        .sorted(comparing(roomUser -> roomUser.getLastChat().getLastSentAt()))
                         .collect(Collectors.toList())
         );
     }
