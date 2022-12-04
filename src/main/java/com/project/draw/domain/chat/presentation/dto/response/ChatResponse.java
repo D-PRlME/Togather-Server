@@ -26,7 +26,7 @@ public class ChatResponse {
     private String sentAt;
 
     @JsonProperty("sent_date")
-    private LocalDate sentDate;
+    private String sentDate;
 
     @JsonProperty("user")
     private UserResponse user;
@@ -45,7 +45,7 @@ public class ChatResponse {
                 .user(UserResponse.of(user))
                 .message(chat.getMessage())
                 .sentAt(DateUtil.meridiemFormat(chat.getCreatedAt()))
-                .sentDate(chat.getCreatedAt().toLocalDate())
+                .sentDate(chat.getCreatedAt().toLocalDate().toString())
                 .build();
     }
 }
