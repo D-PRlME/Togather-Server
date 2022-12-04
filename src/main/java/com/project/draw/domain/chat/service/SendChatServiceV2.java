@@ -39,8 +39,6 @@ public class SendChatServiceV2 {
     @Transactional
     public void execute(SocketIOServer socketIOServer, SocketIOClient socketIOClient, SendChatRequest request) {
 
-        System.out.println("SendChatServiceV2.execute");
-
         User user = userFacade.getCurrentUser(socketIOClient);
         Room room = roomFacade.getCurrentRoom(socketIOClient);
 
@@ -65,9 +63,7 @@ public class SendChatServiceV2 {
                     try {
                         client.sendEvent(SocketProperty.CHAT,
                                 mapper.writeValueAsString(ChatResponse.of(chat, client == socketIOClient)));
-                    } catch (JsonProcessingException e) {
-                        System.out.println("jsonProcessingException");
-                    }
+                    } catch (JsonProcessingException ignore) {}
                     RoomUser clientRoomUser = roomUserFacade
                             .getById(room.getId(), SocketUtil.getUserId(client));
                     clientRoomUser.updateLastReadTime();
