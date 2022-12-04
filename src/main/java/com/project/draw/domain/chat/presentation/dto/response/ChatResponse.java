@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -22,6 +24,9 @@ public class ChatResponse {
 
     @JsonProperty("sent_at")
     private String sentAt;
+
+    @JsonProperty("sent_date")
+    private LocalDate sentDate;
 
     @JsonProperty("user")
     private UserResponse user;
@@ -40,6 +45,7 @@ public class ChatResponse {
                 .user(UserResponse.of(user))
                 .message(chat.getMessage())
                 .sentAt(DateUtil.meridiemFormat(chat.getCreatedAt()))
+                .sentDate(chat.getCreatedAt().toLocalDate())
                 .build();
     }
 }
