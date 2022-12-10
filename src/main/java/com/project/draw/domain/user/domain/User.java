@@ -1,6 +1,7 @@
 package com.project.draw.domain.user.domain;
 
 
+import com.project.draw.domain.chat.domain.Chat;
 import com.project.draw.domain.chat.domain.PrivateRoom;
 import com.project.draw.domain.chat.domain.RoomUser;
 import com.project.draw.domain.post.domain.Like;
@@ -74,6 +75,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Post> post;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Chat> chats;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Like> likes;
