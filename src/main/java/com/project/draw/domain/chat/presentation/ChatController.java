@@ -8,13 +8,18 @@ import com.project.draw.domain.chat.service.CreatePrivateChatRoomService;
 import com.project.draw.domain.chat.service.QueryChatListService;
 import com.project.draw.domain.chat.service.QueryMyRoomListService;
 import lombok.RequiredArgsConstructor;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.DefaultMessageCodesResolver;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.Format;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -34,7 +39,7 @@ public class ChatController {
 
     @GetMapping("/{room-id}")
     public QueryChatListResponse queryChatList(@PathVariable("room-id") Long roomId,
-                                               @RequestParam("time") LocalDateTime localDateTime) {
+                                               @RequestParam("time") @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime localDateTime) {
         return queryChatListService.execute(roomId, localDateTime);
     }
 
