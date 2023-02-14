@@ -58,6 +58,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/posts").permitAll()
                 .antMatchers(HttpMethod.GET, "/posts/tag/list").permitAll()
 
+                .antMatchers(HttpMethod.GET, "/google/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/receiveCode").permitAll()
+
                 .anyRequest().authenticated()
 
                 .and()
